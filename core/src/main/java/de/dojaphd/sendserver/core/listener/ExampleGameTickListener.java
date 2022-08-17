@@ -1,17 +1,17 @@
-package org.example.core.listener;
+package de.dojaphd.sendserver.core.listener;
 
 import com.google.inject.Inject;
+import de.dojaphd.sendserver.core.SendServerAddon;
 import net.labymod.api.event.Phase;
 import net.labymod.api.event.Subscribe;
 import net.labymod.api.event.client.lifecycle.GameTickEvent;
-import org.example.core.ExampleAddon;
 
 public class ExampleGameTickListener {
 
-  private final ExampleAddon addon;
+  private final SendServerAddon addon;
 
   @Inject
-  private ExampleGameTickListener(ExampleAddon addon) {
+  private ExampleGameTickListener(SendServerAddon addon) {
     this.addon = addon;
   }
 
@@ -21,6 +21,6 @@ public class ExampleGameTickListener {
       return;
     }
 
-    this.addon.logger().info(this.addon.configuration().enabled().get() ? "enabled" : "disabled");
+    //this.addon.logger().info(this.addon.configuration().enabled().get() ? "enabled" : "disabled");
   }
 }

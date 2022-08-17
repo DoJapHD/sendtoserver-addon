@@ -60,10 +60,10 @@ subprojects {
 
 addon {
     addonInfo {
-        namespace("example")
-        displayName("Example Addon")
-        author("Example Author")
-        description("An Example Description!")
+        namespace("sendserveraddon")
+        displayName("Send To Server")
+        author("DoJapHD, CrazySchnetzler")
+        description("Easy to use, command based way, to switch between server. '-help' for more information.")
         version(System.getenv().getOrDefault("VERSION", "0.0.0"))
 
         //you can add maven dependencies here. the dependencies will then be downloaded by labymod.

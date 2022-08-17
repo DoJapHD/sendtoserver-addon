@@ -1,7 +1,7 @@
 {
-  "example": {
+  "SendServerAddon": {
     "settings": {
-      "name": "ExampleAddon",
+      "name": "Send To Server",
       "enabled": {
         "name": "Enabled"
       }

@@ -1,4 +1,4 @@
-package org.example.core.commands;
+package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
