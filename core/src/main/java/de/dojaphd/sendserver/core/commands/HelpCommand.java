@@ -6,25 +6,21 @@ import net.kyori.adventure.text.Component;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.event.client.chat.ChatMessageSendEvent;
 
-public class HelpCommand extends Command implements ChatMessageSendEvent {
+public class HelpCommand extends Command {
 
   @Inject
   private HelpCommand() {
     super("ssahelp", "ssahelp");
   }
 
-  public void cancelMessage(ChatMessageSendEvent e) {
-    e.changeMessage("");
-  }
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssahelp")) {
       sendMessage();
-      cancelMessage();
-      return false;
+      return true;
     }
-    return true;
+    return false;
   }
 
   private void sendToUser(String msg) {

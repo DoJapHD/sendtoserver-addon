@@ -16,10 +16,10 @@ public class SendCommand extends Command {
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssasend")) {
       this.displayMessage(Component.text("Ping!", NamedTextColor.AQUA));
-      return false;
+      return true;
     }
 
     this.displayMessage(Component.text("Pong!", NamedTextColor.GOLD));
-    return true;
+    return false;
   }
 }
