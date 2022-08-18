@@ -5,7 +5,6 @@ import de.dojaphd.sendserver.core.SendServerAddon;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.labymod.api.client.chat.command.Command;
-import net.labymod.api.event.client.chat.ChatMessageSendEvent;
 
 public class ShortcutCommand extends Command {
 

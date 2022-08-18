@@ -7,6 +7,7 @@ import de.dojaphd.sendserver.core.commands.ShortcutCommand;
 import de.dojaphd.sendserver.core.utils.ModColor;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.loader.LabyModLoader;
 import net.labymod.api.models.addon.annotation.AddonListener;
 import de.dojaphd.sendserver.core.commands.ExamplePingCommand;
 import de.dojaphd.sendserver.core.listener.ExampleGameTickListener;
@@ -53,7 +54,6 @@ public class SendServerAddon extends LabyAddon<Configuration> {
     this.config.save();
     return true;
   }*/
-
   @Override
   protected Class<Configuration> configurationClass() {
     return Configuration.class;

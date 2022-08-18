@@ -1,5 +1,5 @@
 {
-  "SendServerAddon": {
+  "sendserveraddon": {
     "settings": {
       "name": "Send To Server",
       "enabled": {
