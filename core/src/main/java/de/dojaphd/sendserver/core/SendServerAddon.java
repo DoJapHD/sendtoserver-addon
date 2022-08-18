@@ -7,9 +7,7 @@ import de.dojaphd.sendserver.core.commands.ShortcutCommand;
 import de.dojaphd.sendserver.core.utils.ModColor;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.configuration.loader.Config;
-import net.labymod.api.loader.LabyModLoader;
 import net.labymod.api.models.addon.annotation.AddonListener;
-import de.dojaphd.sendserver.core.commands.ExamplePingCommand;
 import de.dojaphd.sendserver.core.listener.ExampleGameTickListener;
 
 @Singleton
@@ -40,7 +38,9 @@ public class SendServerAddon extends LabyAddon<Configuration> {
     this.registerCommand(HelpCommand.class);
   }
 
-  public static SendServerAddon getAddon() {return addon;}
+  public static SendServerAddon getAddon() {
+    return addon;
+  }
 
   /**public void addShortcut(String key, String server) {
     this.config.getConfigAsJsonObject().get("shortcuts").getAsJsonObject().addProperty(key, server);
