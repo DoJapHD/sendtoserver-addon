@@ -3,7 +3,6 @@ package de.dojaphd.sendserver.core.gui.activity;
 import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.CustomNameTag;
 import de.dojaphd.sendserver.core.SendServerAddon;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.labymod.api.client.gui.mouse.MutableMouse;
 import net.labymod.api.client.gui.screen.LabyScreen;
 import net.labymod.api.client.gui.screen.Parent;
@@ -17,14 +16,11 @@ import net.labymod.api.client.gui.screen.widget.Widget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.DivWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.input.ButtonWidget;
-import net.labymod.api.client.gui.screen.widget.widgets.input.CheckBoxWidget;
-import net.labymod.api.client.gui.screen.widget.widgets.input.CheckBoxWidget.State;
 import net.labymod.api.client.gui.screen.widget.widgets.input.TextFieldWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.ScrollWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
-import net.labymod.api.client.gui.screen.widget.widgets.renderer.IconWidget;
 import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
@@ -137,17 +133,12 @@ public class NameTagActivity extends Activity {
     confirmationWidget.addId("remove-confirmation");
     this.inputWidget.addContent(confirmationWidget);
 
-    /*NameTagWidget previewWidget = new NameTagWidget(nameTagWidget.getUserName(),
-        nameTagWidget.getCustomTag());
-    previewWidget.addId("remove-preview");
-    this.inputWidget.addContent(previewWidget);*/
-
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("remove-button-menu");
 
     menu.addEntry(ButtonWidget.i18n("labymod.ui.button.remove", () -> {
-      this.addon.configuration().getCustomTags().remove(nameTagWidget.getUserName());
-      this.nameTagWidgets.remove(nameTagWidget.getUserName());
+      this.addon.configuration().getCustomTags().remove(nameTagWidget.getShortcut());
+      this.nameTagWidgets.remove(nameTagWidget.getShortcut());
       this.nameTagList.session().setSelectedEntry(null);
       this.setAction(null);
       this.updateRequired = true;
@@ -163,11 +154,6 @@ public class NameTagActivity extends Activity {
     DivWidget inputContainer = new DivWidget();
     inputContainer.addId("input-container");
 
-    /*ComponentWidget customNameWidget = ComponentWidget.component(
-        nameTagWidget.getCustomTag().getComponent());
-    customNameWidget.addId("custom-preview");
-    inputContainer.addChild(customNameWidget);*/
-
     this.inputWidget = new FlexibleContentWidget();
     this.inputWidget.addId("input-list");
 
@@ -178,21 +164,14 @@ public class NameTagActivity extends Activity {
     HorizontalListWidget nameList = new HorizontalListWidget();
     nameList.addId("input-name-list");
 
-    /*IconWidget iconWidget = new IconWidget(
-        nameTagWidget.getIconWidget(nameTagWidget.getUserName()));
-    iconWidget.addId("input-avatar");
-    nameList.addEntry(iconWidget);
-     */
-
     TextFieldWidget nameTextField = new TextFieldWidget();
-    nameTextField.setText(nameTagWidget.getUserName());
+    nameTextField.setText(nameTagWidget.getShortcut());
     nameTextField.updateListener(newValue -> {
       if (newValue.equals(this.lastUserName)) {
         return;
       }
 
       this.lastUserName = newValue;
-      //iconWidget.icon().set(nameTagWidget.getIconWidget(newValue));
     });
 
     nameList.addEntry(nameTextField);
@@ -205,74 +184,34 @@ public class NameTagActivity extends Activity {
     HorizontalListWidget customNameList = new HorizontalListWidget();
     customNameList.addId("input-name-list");
 
-    /*DivWidget placeHolder = new DivWidget();
-    placeHolder.addId("input-avatar");
-    customNameList.addEntry(placeHolder);*/
-
     TextFieldWidget customTextField = new TextFieldWidget();
-    customTextField.setText(nameTagWidget.getCustomTag().getCustomName());
+    customTextField.setText(nameTagWidget.getCustomTag().getServerIp());
     customTextField.updateListener(newValue -> {
       if (newValue.equals(this.lastCustomName)) {
         return;
       }
 
       this.lastCustomName = newValue;
-      /*customNameWidget.setComponent(
-          LegacyComponentSerializer.legacyAmpersand().deserialize(newValue));*/
     });
 
 
     customNameList.addEntry(customTextField);
     this.inputWidget.addContent(customNameList);
 
-    /*HorizontalListWidget checkBoxList = new HorizontalListWidget();
-    checkBoxList.addId("checkbox-list");
-
-    DivWidget enabledDiv = new DivWidget();
-    enabledDiv.addId("checkbox-div");
-
-    ComponentWidget enabledText = ComponentWidget.i18n("sendserveraddon.gui.manage.enabled.name");
-    enabledText.addId("checkbox-name");
-    enabledDiv.addChild(enabledText);
-
-    CheckBoxWidget enabledWidget = new CheckBoxWidget();
-    enabledWidget.addId("checkbox-item");
-    enabledWidget.setState(
-        nameTagWidget.getCustomTag().isEnabled() ? State.CHECKED : State.UNCHECKED);
-    enabledDiv.addChild(enabledWidget);
-    checkBoxList.addEntry(enabledDiv);
-
-    DivWidget replaceDiv = new DivWidget();
-    replaceDiv.addId("checkbox-div");
-
-    ComponentWidget replaceText = ComponentWidget.i18n("sendserveraddon.gui.manage.replace.name");
-    replaceText.addId("checkbox-name");
-    replaceDiv.addChild(replaceText);
-
-    CheckBoxWidget replaceWidget = new CheckBoxWidget();
-    replaceWidget.addId("checkbox-item");
-    replaceWidget.setState(
-        nameTagWidget.getCustomTag().isReplaceScoreboard() ? State.CHECKED : State.UNCHECKED);
-    replaceDiv.addChild(replaceWidget);
-    checkBoxList.addEntry(replaceDiv);
-    this.inputWidget.addContent(checkBoxList);*/
-
     HorizontalListWidget buttonList = new HorizontalListWidget();
     buttonList.addId("edit-button-menu");
 
     buttonList.addEntry(ButtonWidget.i18n("labymod.ui.button.done", () -> {
-      if (nameTagWidget.getUserName().length() == 0) {
+      if (nameTagWidget.getShortcut().length() == 0) {
         this.nameTagWidgets.put(nameTextField.getText(), nameTagWidget);
         this.nameTagList.session().setSelectedEntry(nameTagWidget);
       }
 
-      this.addon.configuration().getCustomTags().remove(nameTagWidget.getUserName());
+      this.addon.configuration().getCustomTags().remove(nameTagWidget.getShortcut());
       CustomNameTag customNameTag = nameTagWidget.getCustomTag();
-      customNameTag.setCustomName(customTextField.getText());
-      /*customNameTag.setEnabled(enabledWidget.state() == State.CHECKED);
-      customNameTag.setReplaceScoreboard(replaceWidget.state() == State.CHECKED);*/
+      customNameTag.setServerIp(customTextField.getText());
       this.addon.configuration().getCustomTags().put(nameTextField.getText(), customNameTag);
-      nameTagWidget.setUserName(nameTextField.getText());
+      nameTagWidget.setShortcut(nameTextField.getText());
       nameTagWidget.setCustomTag(customNameTag);
       this.setAction(null);
 

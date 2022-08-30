@@ -7,7 +7,6 @@ import de.dojaphd.sendserver.core.commands.SendCommand;
 import de.dojaphd.sendserver.core.commands.ShortcutCommand;
 import de.dojaphd.sendserver.core.listener.ExampleGameTickListener;
 import de.dojaphd.sendserver.core.utils.ModColor;
-import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.event.client.scoreboard.TabListUpdateEvent;
