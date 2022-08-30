@@ -7,29 +7,17 @@
       },
       "openNameTags": {
         "name": "Edit Shortcuts"
-      },
-      "hideNameTagBackground": {
-        "name": "Hide NameTag Background"
-      },
-      "color": {
-        "name": "Background Color"
       }
     },
     "gui": {
       "manage": {
-        "add": "Add a new custom Name Tag",
-        "name": "Minecraft Username",
+        "add": "Add a new shortcut",
+        "name": "Shortcut",
         "custom": {
-          "name": "New Name for this Player"
+          "name": "Server IP"
         },
         "enabled": {
           "name": "Enabled"
-        },
-        "replace": {
-          "name": "Replace Prefix & Suffix"
-        },
-        "remove": {
-          "title": "Do you really want to remove this entry?"
         }
       },
       "navigation": {
