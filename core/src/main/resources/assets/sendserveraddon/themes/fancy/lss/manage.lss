@@ -20,12 +20,12 @@ TextField {
     alignment-x: center;
     alignment-y: center;
 
-	  background-color: rgba(250, 250, 250, 0.3);
+	  background-color: rgba(20, 20, 20, 1.0);
 	  padding-top: 20.0;
 	  padding-left: 10.0;
 	  padding-right: 10.0;
 	  padding-bottom: 45.0;
-	  //border-radius: 5;
+	  border-radius: 5;
 
     .input-list {
       left: 0;
@@ -37,17 +37,12 @@ TextField {
 }
 
 NameTag {
-  background-color: rgba(250, 250, 250, 0.3);
-  //border-radius: 5;
+  background-color: rgba(17,17,17,0.55);
+  border-radius: 5;
 }
 
 NameTag:hover {
-  background-color: rgba(200, 200, 200, 0.3);
-}
-
-NameTag:selected {
-  border: 1 #aaaaaa;
-
+  background-color: rgba(17,17,17,0.70);
 }
 
 
@@ -72,8 +67,9 @@ NameTag:selected {
   alignment-y: center;
   space-between-entries: 15;
 
-	background-color: rgba(250, 250, 250, 0.3);
+	background-color: rgba(20, 20, 20, 1.0);
   padding: 10;
+  border-radius: 5;
 }
 
 .remove-confirmation {
