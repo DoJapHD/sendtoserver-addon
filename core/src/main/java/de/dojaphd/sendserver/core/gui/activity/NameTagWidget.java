@@ -23,9 +23,9 @@ public class NameTagWidget extends SimpleWidget {
   @Override
   public void initialize(Parent parent) {
     super.initialize(parent);
-    IconWidget iconWidget = new IconWidget(this.getIconWidget(this.userName));
+    /*IconWidget iconWidget = new IconWidget(this.getIconWidget(this.userName));
     iconWidget.addId("avatar");
-    this.addChild(iconWidget);
+    this.addChild(iconWidget);*/
 
     ComponentWidget nameWidget = ComponentWidget.component(Component.text(this.userName));
     nameWidget.addId("name");

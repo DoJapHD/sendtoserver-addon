@@ -2,17 +2,20 @@ package de.dojaphd.sendserver.core;
 
 import com.google.inject.Singleton;
 import de.dojaphd.sendserver.core.commands.HelpCommand;
+import de.dojaphd.sendserver.core.commands.MenuOpenerCommand;
 import de.dojaphd.sendserver.core.commands.SendCommand;
 import de.dojaphd.sendserver.core.commands.ShortcutCommand;
+import de.dojaphd.sendserver.core.listener.ExampleGameTickListener;
 import de.dojaphd.sendserver.core.utils.ModColor;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.configuration.loader.Config;
+import net.labymod.api.event.client.scoreboard.TabListUpdateEvent;
 import net.labymod.api.models.addon.annotation.AddonListener;
-import de.dojaphd.sendserver.core.listener.ExampleGameTickListener;
 
-@Singleton
 @AddonListener
-public class SendServerAddon extends LabyAddon<Configuration> {
+@Singleton
+public class SendServerAddon extends LabyAddon<AddonConfiguration> {
 
   public static SendServerAddon addon;
 
@@ -23,6 +26,7 @@ public class SendServerAddon extends LabyAddon<Configuration> {
   protected void enable() {
     this.registerSettingCategory();
 
+
     this.logger().info("[Send-Server-Addon] Addon loaded.");
 
     addon = this;
@@ -30,32 +34,26 @@ public class SendServerAddon extends LabyAddon<Configuration> {
     init();
   }
 
+
   private void init() {
     this.registerListener(ExampleGameTickListener.class);
 
     this.registerCommand(SendCommand.class);
     this.registerCommand(ShortcutCommand.class);
     this.registerCommand(HelpCommand.class);
+    this.registerCommand(MenuOpenerCommand.class);
   }
 
   public static SendServerAddon getAddon() {
     return addon;
   }
 
-  /**public void addShortcut(String key, String server) {
-    this.config.getConfigAsJsonObject().get("shortcuts").getAsJsonObject().addProperty(key, server);
-    this.config.save();
+  @Override
+  protected Class<AddonConfiguration> configurationClass() {
+    return AddonConfiguration.class;
   }
 
-  public boolean removeShortcut(String key) {
-    if (!this.config.getConfigAsJsonObject().get("shortcuts").getAsJsonObject().has(key))
-      return false;
-    this.config.getConfigAsJsonObject().get("shortcuts").getAsJsonObject().remove(key);
-    this.config.save();
-    return true;
-  }*/
-  @Override
-  protected Class<Configuration> configurationClass() {
-    return Configuration.class;
+  public void reloadTabList() {
+    this.labyAPI().eventBus().fire(new TabListUpdateEvent());
   }
 }

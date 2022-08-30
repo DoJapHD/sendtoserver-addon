@@ -19,10 +19,10 @@ public final class AddonConfiguration extends AddonConfig {
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
-  @SwitchSetting
+  /*@SwitchSetting
   private final ConfigProperty<Boolean> hideNameTagBackground = new ConfigProperty<>(false);
   @ColorPickerSetting
-  private final ConfigProperty<Integer> color = new ConfigProperty<>(0);
+  private final ConfigProperty<Integer> color = new ConfigProperty<>(0);*/
 
   private Map<String, CustomNameTag> customTags = new HashMap<>();
 
@@ -30,13 +30,13 @@ public final class AddonConfiguration extends AddonConfig {
     return this.enabled;
   }
 
-  public ConfigProperty<Boolean> shouldHideNameTagBackground() {
+  /*public ConfigProperty<Boolean> shouldHideNameTagBackground() {
     return this.hideNameTagBackground;
-  }
+  }*/
 
-  public ConfigProperty<Integer> color() {
+  /*public ConfigProperty<Integer> color() {
     return this.color;
-  }
+  }*/
 
   public Map<String, CustomNameTag> getCustomTags() {
     return this.customTags;

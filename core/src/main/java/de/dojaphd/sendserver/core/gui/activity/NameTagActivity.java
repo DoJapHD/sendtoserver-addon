@@ -137,10 +137,10 @@ public class NameTagActivity extends Activity {
     confirmationWidget.addId("remove-confirmation");
     this.inputWidget.addContent(confirmationWidget);
 
-    NameTagWidget previewWidget = new NameTagWidget(nameTagWidget.getUserName(),
+    /*NameTagWidget previewWidget = new NameTagWidget(nameTagWidget.getUserName(),
         nameTagWidget.getCustomTag());
     previewWidget.addId("remove-preview");
-    this.inputWidget.addContent(previewWidget);
+    this.inputWidget.addContent(previewWidget);*/
 
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("remove-button-menu");
@@ -163,10 +163,10 @@ public class NameTagActivity extends Activity {
     DivWidget inputContainer = new DivWidget();
     inputContainer.addId("input-container");
 
-    ComponentWidget customNameWidget = ComponentWidget.component(
+    /*ComponentWidget customNameWidget = ComponentWidget.component(
         nameTagWidget.getCustomTag().getComponent());
     customNameWidget.addId("custom-preview");
-    inputContainer.addChild(customNameWidget);
+    inputContainer.addChild(customNameWidget);*/
 
     this.inputWidget = new FlexibleContentWidget();
     this.inputWidget.addId("input-list");
@@ -178,10 +178,11 @@ public class NameTagActivity extends Activity {
     HorizontalListWidget nameList = new HorizontalListWidget();
     nameList.addId("input-name-list");
 
-    IconWidget iconWidget = new IconWidget(
+    /*IconWidget iconWidget = new IconWidget(
         nameTagWidget.getIconWidget(nameTagWidget.getUserName()));
     iconWidget.addId("input-avatar");
     nameList.addEntry(iconWidget);
+     */
 
     TextFieldWidget nameTextField = new TextFieldWidget();
     nameTextField.setText(nameTagWidget.getUserName());
@@ -191,7 +192,7 @@ public class NameTagActivity extends Activity {
       }
 
       this.lastUserName = newValue;
-      iconWidget.icon().set(nameTagWidget.getIconWidget(newValue));
+      //iconWidget.icon().set(nameTagWidget.getIconWidget(newValue));
     });
 
     nameList.addEntry(nameTextField);
@@ -204,9 +205,9 @@ public class NameTagActivity extends Activity {
     HorizontalListWidget customNameList = new HorizontalListWidget();
     customNameList.addId("input-name-list");
 
-    DivWidget placeHolder = new DivWidget();
+    /*DivWidget placeHolder = new DivWidget();
     placeHolder.addId("input-avatar");
-    customNameList.addEntry(placeHolder);
+    customNameList.addEntry(placeHolder);*/
 
     TextFieldWidget customTextField = new TextFieldWidget();
     customTextField.setText(nameTagWidget.getCustomTag().getCustomName());
@@ -216,14 +217,15 @@ public class NameTagActivity extends Activity {
       }
 
       this.lastCustomName = newValue;
-      customNameWidget.setComponent(
-          LegacyComponentSerializer.legacyAmpersand().deserialize(newValue));
+      /*customNameWidget.setComponent(
+          LegacyComponentSerializer.legacyAmpersand().deserialize(newValue));*/
     });
+
 
     customNameList.addEntry(customTextField);
     this.inputWidget.addContent(customNameList);
 
-    HorizontalListWidget checkBoxList = new HorizontalListWidget();
+    /*HorizontalListWidget checkBoxList = new HorizontalListWidget();
     checkBoxList.addId("checkbox-list");
 
     DivWidget enabledDiv = new DivWidget();
@@ -253,7 +255,7 @@ public class NameTagActivity extends Activity {
         nameTagWidget.getCustomTag().isReplaceScoreboard() ? State.CHECKED : State.UNCHECKED);
     replaceDiv.addChild(replaceWidget);
     checkBoxList.addEntry(replaceDiv);
-    this.inputWidget.addContent(checkBoxList);
+    this.inputWidget.addContent(checkBoxList);*/
 
     HorizontalListWidget buttonList = new HorizontalListWidget();
     buttonList.addId("edit-button-menu");
@@ -267,8 +269,8 @@ public class NameTagActivity extends Activity {
       this.addon.configuration().getCustomTags().remove(nameTagWidget.getUserName());
       CustomNameTag customNameTag = nameTagWidget.getCustomTag();
       customNameTag.setCustomName(customTextField.getText());
-      customNameTag.setEnabled(enabledWidget.state() == State.CHECKED);
-      customNameTag.setReplaceScoreboard(replaceWidget.state() == State.CHECKED);
+      /*customNameTag.setEnabled(enabledWidget.state() == State.CHECKED);
+      customNameTag.setReplaceScoreboard(replaceWidget.state() == State.CHECKED);*/
       this.addon.configuration().getCustomTags().put(nameTextField.getText(), customNameTag);
       nameTagWidget.setUserName(nameTextField.getText());
       nameTagWidget.setCustomTag(customNameTag);
