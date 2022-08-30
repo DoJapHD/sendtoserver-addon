@@ -1,0 +1,102 @@
+.name-tag-container {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  bottom: 32;
+
+  Scroll {
+    width: 90%;
+    top: 0;
+    bottom: 0;
+    margin-top: 5;
+    margin-bottom: 5;
+    left: 50%;
+    alignment-x: center;
+
+    .name-tag-list {
+      left: 0;
+      top: 0;
+      height: fit-content;
+      space-between-entries: 2;
+      selectable: true;
+
+      .name-tag-selected {
+        height: 150;
+        border: 1 gray;
+      }
+    }
+
+    Scrollbar {
+      left: 0;
+      top: 0;
+      width: 5;
+      height: 100%;
+      margin-left: 5;
+    }
+  }
+}
+
+NameTag {
+  width: 100%;
+  height: 24;
+
+  .avatar {
+    left: 4;
+    top: 2;
+    width: 16;
+    height: width;
+    clickable: true;
+
+    margin-top: 2;
+  }
+
+  .name {
+    left: 22;
+    top: 2;
+  }
+
+  .custom-name {
+    left: 22;
+    top: 13;
+  }
+
+  .input-list {
+    left: 0;
+    top: 30;
+    width: 100%;
+    bottom: 0;
+  }
+
+  .label-name {
+    margin-left: 5;
+  }
+
+  .name-text-field {
+    top: 0;
+    left: 0;
+    height: 20;
+    width: 90%;
+    margin: 2 5 5 5;
+  }
+}
+
+.overview-button-menu {
+  width: 90%;
+  height: 20;
+  left: 50%;
+  alignment-x: center;
+  bottom: 5;
+  layout: fill;
+  space-between-entries: 8;
+}
+
+.edit-button-menu {
+  width: 90%;
+  height: 20;
+  left: 50%;
+  alignment-x: center;
+  bottom: 0;
+  layout: fill;
+  space-between-entries: 8;
+}

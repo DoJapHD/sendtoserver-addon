@@ -5,6 +5,8 @@ import de.dojaphd.sendserver.core.SendServerAddon;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.labymod.api.client.chat.command.Command;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class ShortcutCommand extends Command {
 
@@ -16,7 +18,25 @@ public class ShortcutCommand extends Command {
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssashortcut")) {
-      this.displayMessage(Component.text("Ping!", NamedTextColor.AQUA));
+      /*if(arguments.length != 1) {
+        sendToUser("§cSyntax: /ssashortcut <add | remove | list>");
+      } else*/ if (arguments.length == 1) {
+        switch (arguments[0].toLowerCase()) {
+          case "list":
+            this.displayMessage("ListCMD");
+            //displayList();
+            break;
+          case "add":
+            this.displayMessage("AddCMD");
+            //add
+            break;
+          case "remove":
+            this.displayMessage("RemoveCMD");
+            //remove
+            break;
+        }
+      }
+
       return true;
     }
 
@@ -24,6 +44,11 @@ public class ShortcutCommand extends Command {
     return false;
   }
 
+
+
+  /*
+  Jan Code
+   */
   public boolean onSend(String message) {
     if (!message.startsWith("-shortcut"))
       return false;

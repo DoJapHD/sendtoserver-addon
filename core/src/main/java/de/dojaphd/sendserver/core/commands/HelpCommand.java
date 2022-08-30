@@ -2,11 +2,13 @@ package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import de.dojaphd.sendserver.core.gui.activity.NameTagActivity;
 import net.kyori.adventure.text.Component;
+import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.Command;
-import net.labymod.api.event.client.chat.ChatMessageSendEvent;
 
 public class HelpCommand extends Command {
+
 
   @Inject
   private HelpCommand() {
@@ -17,22 +19,29 @@ public class HelpCommand extends Command {
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssahelp")) {
+      if(arguments.length != 0) {
+        sendToUser("§cSyntax: /ssahelp");
+    }
       sendMessage();
       return true;
     }
     return false;
   }
 
+
   private void sendToUser(String msg) {
-    //SendServerAddon.getAddon().getApi().displayMessageInChat(SendServerAddon.Prefix + msg);
+
     this.displayMessage(Component.text(SendServerAddon.Prefix + msg));
   }
 
   public void sendMessage() {
     sendToUser("§a--------- §6Help §a---------");
-    sendToUser("§6/ssasend <shortcut> §7» §aConnect to a server using a shortcut.");
-    sendToUser("§6/ssashortcut add <shortcut> <serverIp> §7» §aadd a new shortcut for a server.");
+    sendToUser("§6/ssasend [shortcut] §7» §aConnect to a server using a shortcut.");
+    /*sendToUser("§6/ssashortcut add <shortcut> <serverIp> §7» §aadd a new shortcut for a server.");
     sendToUser("§6/ssashortcut remove <shortcut> §7» §aRemove a shortcut from your list.");
-    sendToUser("§6/ssashortcut list §7» §aLists all of your shortcuts.");
+    sendToUser("§6/ssashortcut list §7» §aLists all of your shortcuts.");*/
+    //sendToUser("§6/ssashortcuts §7» §aOpens the addon settings.");
+    sendToUser("§6/ssahelp §7» §aSends this help message.");
+    sendToUser("§a------------------------");
   }
 }

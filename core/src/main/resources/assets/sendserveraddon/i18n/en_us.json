@@ -4,6 +4,36 @@
       "name": "Send To Server",
       "enabled": {
         "name": "Enabled"
+      },
+      "openNameTags": {
+        "name": "Edit Shortcuts"
+      },
+      "hideNameTagBackground": {
+        "name": "Hide NameTag Background"
+      },
+      "color": {
+        "name": "Background Color"
+      }
+    },
+    "gui": {
+      "manage": {
+        "add": "Add a new custom Name Tag",
+        "name": "Minecraft Username",
+        "custom": {
+          "name": "New Name for this Player"
+        },
+        "enabled": {
+          "name": "Enabled"
+        },
+        "replace": {
+          "name": "Replace Prefix & Suffix"
+        },
+        "remove": {
+          "title": "Do you really want to remove this entry?"
+        }
+      },
+      "navigation": {
+        "name": "Send To Server"
       }
     }
   }
