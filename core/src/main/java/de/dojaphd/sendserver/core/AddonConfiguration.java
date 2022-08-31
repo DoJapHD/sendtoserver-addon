@@ -1,6 +1,6 @@
 package de.dojaphd.sendserver.core;
 
-import de.dojaphd.sendserver.core.gui.activity.NameTagActivity;
+import de.dojaphd.sendserver.core.gui.activity.ShortcutActivity;
 import java.util.HashMap;
 import java.util.Map;
 import net.labymod.api.addon.AddonConfig;
@@ -32,6 +32,6 @@ public final class AddonConfiguration extends AddonConfig {
   @MethodOrder(after = "enabled")
   @AddonActivitySetting
   public Activity openNameTags() {
-    return LabyGuice.getInstance(NameTagActivity.class);
+    return LabyGuice.getInstance(ShortcutActivity.class);
   }
 }
