@@ -26,6 +26,21 @@
       "navigation": {
         "name": "Send To Server"
       }
+    },
+    "commands": {
+      "send": {
+        "notfound": "§cCouldn't find the used shortcut. Did you add it already?"
+      },
+      "general": {
+        "syntax": "§cSyntax: %s"
+      },
+      "help": {
+        "msg1": "§a--------- §6Help §a---------",
+        "msg2": "§6/ssasend [shortcut] §7» §aConnect to a server using a shortcut.",
+        "msg3": "§6/ssashortcuts §7» §aOpens the shortcut editor menu",
+        "msg4": "§6/ssahelp §7» §aSends this help message.",
+        "msg5": "§a-----------------------"
+      }
     }
   }
 }
