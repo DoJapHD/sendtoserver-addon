@@ -36,7 +36,7 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
   private void init() {
     this.registerCommand(SendCommand.class);
     this.registerCommand(HelpCommand.class);
-    this.registerCommand(MenuOpenerCommand.class);
+    //this.registerCommand(MenuOpenerCommand.class);
   }
 
   @Override
