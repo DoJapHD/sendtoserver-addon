@@ -3,6 +3,9 @@ package de.dojaphd.sendserver.core.gui.activity;
 import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.CustomNameTag;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import net.labymod.api.client.gui.mouse.MutableMouse;
 import net.labymod.api.client.gui.screen.LabyScreen;
 import net.labymod.api.client.gui.screen.Parent;
@@ -22,9 +25,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.ScrollWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import org.jetbrains.annotations.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
 @AutoActivity
 @Link("manage.lss")
@@ -177,7 +177,8 @@ public class NameTagActivity extends Activity {
     nameList.addEntry(nameTextField);
     this.inputWidget.addContent(nameList);
 
-    ComponentWidget labelCustomName = ComponentWidget.i18n("sendserveraddon.gui.manage.custom.name");
+    ComponentWidget labelCustomName = ComponentWidget.i18n(
+        "sendserveraddon.gui.manage.custom.name");
     labelCustomName.addId("label-name");
     this.inputWidget.addContent(labelCustomName);
 
@@ -193,7 +194,6 @@ public class NameTagActivity extends Activity {
 
       this.lastCustomName = newValue;
     });
-
 
     customNameList.addEntry(customTextField);
     this.inputWidget.addContent(customNameList);

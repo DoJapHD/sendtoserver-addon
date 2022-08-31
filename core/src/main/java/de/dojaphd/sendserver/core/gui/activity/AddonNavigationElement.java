@@ -3,13 +3,12 @@ package de.dojaphd.sendserver.core.gui.activity;
 import net.kyori.adventure.text.Component;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.gui.navigation.NavigationElement;
-import net.labymod.api.client.gui.navigation.elements.ActivityNavigationElement;
 import net.labymod.api.client.gui.screen.ScreenInstance;
 import net.labymod.api.client.gui.screen.activity.Activity;
 
 public class AddonNavigationElement extends NavigationElement {
 
-  private ScreenInstance screen;
+  private final ScreenInstance screen;
 
   private AddonNavigationElement(ScreenInstance screen) {
     this.screen = screen;
