@@ -5,10 +5,12 @@ import de.dojaphd.sendserver.core.SendServerAddon;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.labymod.api.client.chat.command.Command;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class ShortcutCommand extends Command {
+
+  /*
+  Will get replaced with MenuOpener
+   */
 
   @Inject
   private ShortcutCommand() {
@@ -20,7 +22,8 @@ public class ShortcutCommand extends Command {
     if (prefix.equalsIgnoreCase("ssashortcut")) {
       /*if(arguments.length != 1) {
         sendToUser("§cSyntax: /ssashortcut <add | remove | list>");
-      } else*/ if (arguments.length == 1) {
+      } else*/
+      if (arguments.length == 1) {
         switch (arguments[0].toLowerCase()) {
           case "list":
             this.displayMessage("ListCMD");
@@ -45,13 +48,13 @@ public class ShortcutCommand extends Command {
   }
 
 
-
   /*
   Jan Code
    */
   public boolean onSend(String message) {
-    if (!message.startsWith("-shortcut"))
+    if (!message.startsWith("-shortcut")) {
       return false;
+    }
 
     String[] splits = message.split(" ");
     String[] args = new String[splits.length - 1];
@@ -75,8 +78,9 @@ public class ShortcutCommand extends Command {
 
     if (args.length < 2) {
       String messageToSend = "§c-shortcut " + settingArg + " <shortcut>";
-      if (settingArg.equals("add"))
+      if (settingArg.equals("add")) {
         messageToSend += " <server>";
+      }
       sendToUser(messageToSend);
       return true;
     }

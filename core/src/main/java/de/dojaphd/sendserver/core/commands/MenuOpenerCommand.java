@@ -1,54 +1,60 @@
 package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
-import de.dojaphd.sendserver.core.AddonConfiguration;
 import de.dojaphd.sendserver.core.SendServerAddon;
 import de.dojaphd.sendserver.core.gui.activity.AddonNavigationElement;
-import de.dojaphd.sendserver.core.gui.activity.NameTagActivity;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.labymod.api.Laby;
-import net.labymod.api.LabyAPI;
 import net.labymod.api.client.chat.command.Command;
-import net.labymod.api.client.gui.screen.widget.widgets.activity.settings.AddonActivityWidget;
-import net.labymod.api.loader.LabyModLoader;
-import java.util.Arrays;
+import net.labymod.api.util.I18n;
 
 public class MenuOpenerCommand extends Command {
 
-AddonNavigationElement addonNavigationElement;
+  AddonNavigationElement addonNavigationElement;
+  String syntax = "/ssashortcuts";
 
   @Inject
   private MenuOpenerCommand() {
     super("ssashortcuts", "ssashortcuts");
+
+    this.translationKey("sendserveraddon.commands");
   }
-/**
-  * Currently not working as no method found to implement idea
- **/
+
+  /**
+   * Currently not working as no method found to implement idea
+   **/
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssashortcuts")) {
-      if(arguments.length != 0) {
-        sendToUser("§cSyntax: /ssashortcuts");
+      if (arguments.length != 0) {
+        displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
       }
-      System.out.println("Passt");
+      //System.out.println("Passt");
       try {
         Laby.labyAPI().navigationService().updateLastOpenedElement(addonNavigationElement);
 
       } catch (Exception e) {
         System.out.println(e);
       }
+      displayMessage("Command detected, success");
       SendServerAddon.getAddon().configuration().openNameTags();
-
 
       return true;
     }
     return false;
   }
 
-  private void sendToUser(String msg) {
-    //SendServerAddon.getAddon().getApi().displayMessageInChat(SendServerAddon.Prefix + msg);
-    this.displayMessage(Component.text(SendServerAddon.Prefix + msg));
+  private void displayTranslatableMsg(String key, TextColor textColor, Object... arguments) {
+    String translationKey = key;
+    if (this.translationKey != null) {
+      translationKey = this.translationKey + "." + key;
+    }
+
+    String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
+    this.displayMessage(Component.text(message, textColor));
   }
 
 }

@@ -1,21 +1,29 @@
 package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
+import de.dojaphd.sendserver.core.CustomNameTag;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextColor;
 import net.labymod.api.client.chat.command.Command;
+import net.labymod.api.inject.LabyGuice;
+import net.labymod.api.util.I18n;
 
-public class SendCommand extends Command{
+public class SendCommand extends Command {
 
   SendServerAddon addon = LabyGuice.getInstance(SendServerAddon.class);
-  
+  String syntax = "/ssasend [shortcut]";
+
   @Inject
   private SendCommand() {
     super("ssasend", "ssasend");
+
+    this.translationKey("sendserveraddon.commands");
   }
 
-
-    //Laby.labyAPI().minecraft().chatExecutor().displayClientMessage("Test");
-    //Laby.labyAPI().minecraft().chatExecutor().copyToClipboard("CopyTest");
+  //Laby.labyAPI().minecraft().chatExecutor().displayClientMessage("Test");
+  //Laby.labyAPI().minecraft().chatExecutor().copyToClipboard("CopyTest");
 
 
   @Override
@@ -26,23 +34,30 @@ public class SendCommand extends Command{
       try {
         serverTarget = arguments[0];
       } catch (IndexOutOfBoundsException exception) {
-        sendToUser("§cSyntax: /ssasend [shortcut]");
+        displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
         return true;
       }
-      String serverIp = addon.getIp(serverTarget).getServerIp();
+      CustomNameTag serverIp = addon.getIp(serverTarget);
 
       if (serverIp == null) {
-        sendToUser("Blub mit not found und so");
+        displayTranslatableMsg("send.notfound", NamedTextColor.RED);
+        return true;
+      } else {
+        addon.labyAPI().serverController().joinServer(addon.getIp(serverTarget).getServerIp());
         return true;
       }
-
-      addon.labyAPI().serverController().joinServer(serverIp);
-      return true;
     }
     return false;
   }
 
-  private void sendToUser(String msg) {
-    SendServerAddon.getAddon().displayMessage(SendServerAddon.Prefix + msg);
+  private void displayTranslatableMsg(String key, TextColor textColor, Object... arguments) {
+    String translationKey = key;
+    if (this.translationKey != null) {
+      translationKey = this.translationKey + "." + key;
+    }
+
+    String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
+    this.displayMessage(Component.text(message, textColor));
   }
+
 }
