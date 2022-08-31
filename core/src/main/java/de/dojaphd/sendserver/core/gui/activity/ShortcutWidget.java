@@ -1,6 +1,6 @@
 package de.dojaphd.sendserver.core.gui.activity;
 
-import de.dojaphd.sendserver.core.CustomNameTag;
+import de.dojaphd.sendserver.core.ShortcutManager;
 import net.kyori.adventure.text.Component;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
@@ -11,11 +11,11 @@ import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 public class ShortcutWidget extends SimpleWidget {
 
   private String shortcut;
-  private CustomNameTag customNameTag;
+  private ShortcutManager shortcutManager;
 
-  public ShortcutWidget(String shortcut, CustomNameTag customNameTag) {
+  public ShortcutWidget(String shortcut, ShortcutManager shortcutManager) {
     this.shortcut = shortcut;
-    this.customNameTag = customNameTag;
+    this.shortcutManager = shortcutManager;
   }
 
   @Override
@@ -26,7 +26,7 @@ public class ShortcutWidget extends SimpleWidget {
     nameWidget.addId("name");
     this.addChild(nameWidget);
 
-    ComponentWidget customNameWidget = ComponentWidget.component(this.customNameTag.getComponent());
+    ComponentWidget customNameWidget = ComponentWidget.component(this.shortcutManager.getComponent());
     customNameWidget.addId("custom-name");
     this.addChild(customNameWidget);
   }
@@ -39,11 +39,11 @@ public class ShortcutWidget extends SimpleWidget {
     this.shortcut = shortcut;
   }
 
-  public CustomNameTag getCustomTag() {
-    return this.customNameTag;
+  public ShortcutManager getCustomTag() {
+    return this.shortcutManager;
   }
 
-  public void setCustomTag(CustomNameTag customNameTag) {
-    this.customNameTag = customNameTag;
+  public void setCustomTag(ShortcutManager shortcutManager) {
+    this.shortcutManager = shortcutManager;
   }
 }

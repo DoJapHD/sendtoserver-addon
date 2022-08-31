@@ -1,7 +1,7 @@
 package de.dojaphd.sendserver.core.gui.activity;
 
 import com.google.inject.Inject;
-import de.dojaphd.sendserver.core.CustomNameTag;
+import de.dojaphd.sendserver.core.ShortcutManager;
 import de.dojaphd.sendserver.core.SendServerAddon;
 import java.util.HashMap;
 import java.util.Map;
@@ -109,7 +109,7 @@ public class ShortcutActivity extends Activity {
     switch (this.action) {
       default:
       case ADD:
-        ShortcutWidget newCustomNameTag = new ShortcutWidget("", CustomNameTag.createDefault());
+        ShortcutWidget newCustomNameTag = new ShortcutWidget("", ShortcutManager.createDefault());
         overlayWidget = this.initializeManageContainer(newCustomNameTag);
         break;
       case EDIT:
@@ -208,11 +208,11 @@ public class ShortcutActivity extends Activity {
       }
 
       this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
-      CustomNameTag customNameTag = shortcutWidget.getCustomTag();
-      customNameTag.setServerIp(customTextField.getText());
-      this.addon.configuration().getCustomTags().put(nameTextField.getText(), customNameTag);
+      ShortcutManager shortcutManager = shortcutWidget.getCustomTag();
+      shortcutManager.setServerIp(customTextField.getText());
+      this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
       shortcutWidget.setShortcut(nameTextField.getText());
-      shortcutWidget.setCustomTag(customNameTag);
+      shortcutWidget.setCustomTag(shortcutManager);
       this.setAction(null);
 
       this.updateRequired = true;

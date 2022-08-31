@@ -4,7 +4,6 @@ import com.google.inject.Singleton;
 import de.dojaphd.sendserver.core.commands.HelpCommand;
 import de.dojaphd.sendserver.core.commands.MenuOpenerCommand;
 import de.dojaphd.sendserver.core.commands.SendCommand;
-import de.dojaphd.sendserver.core.commands.ShortcutCommand;
 import de.dojaphd.sendserver.core.utils.ModColor;
 import java.util.Map;
 import net.labymod.api.addon.LabyAddon;
@@ -49,8 +48,8 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
     this.labyAPI().eventBus().fire(new TabListUpdateEvent());
   }
 
-  public CustomNameTag getIp(String shortcut) {
-    Map<String, CustomNameTag> shortcuts = addon.configuration().getCustomTags();
+  public ShortcutManager getIp(String shortcut) {
+    Map<String, ShortcutManager> shortcuts = addon.configuration().getCustomTags();
 
     for (String string : shortcuts.keySet()) {
       if (string.equalsIgnoreCase(shortcut)) {

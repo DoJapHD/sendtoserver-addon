@@ -18,14 +18,14 @@ public final class AddonConfiguration extends AddonConfig {
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
-  private final Map<String, CustomNameTag> customTags = new HashMap<>();
+  private final Map<String, ShortcutManager> customTags = new HashMap<>();
 
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
   }
 
 
-  public Map<String, CustomNameTag> getCustomTags() {
+  public Map<String, ShortcutManager> getCustomTags() {
     return this.customTags;
   }
 
