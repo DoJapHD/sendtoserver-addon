@@ -55,4 +55,15 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
   public void reloadTabList() {
     this.labyAPI().eventBus().fire(new TabListUpdateEvent());
   }
+  
+  public CustomNameTag getIp(String shortcut) {
+    Map<String, CustomNameTag> shortcuts = addon.configuration().getCustomTags();
+
+    for (String string : shortcuts.keySet()) {
+      logger().info("String: " + string);
+      if (string.equalsIgnoreCase(shortcut))
+        return shortcuts.get(string);
+    }
+    return null;
+  }
 }
