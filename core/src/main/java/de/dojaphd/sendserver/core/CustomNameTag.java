@@ -3,19 +3,19 @@ package de.dojaphd.sendserver.core;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
-public class ShortcutManager {
+public class CustomNameTag {
 
   private String serverIp;
 
-  private ShortcutManager(String serverIp) {
+  private CustomNameTag(String serverIp) {
     this.serverIp = serverIp;
   }
 
-  public static ShortcutManager create(String serverIp) {
-    return new ShortcutManager(serverIp);
+  public static CustomNameTag create(String serverIp) {
+    return new CustomNameTag(serverIp);
   }
 
-  public static ShortcutManager createDefault() {
+  public static CustomNameTag createDefault() {
     return create("");
   }
 

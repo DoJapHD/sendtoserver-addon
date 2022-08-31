@@ -15,7 +15,7 @@ public class AddonNavigationElement extends NavigationElement {
   }
 
   public Class<? extends Activity> getActivityClass() {
-    return ShortcutActivity.class;
+    return NameTagActivity.class;
   }
 
   @Override
@@ -40,6 +40,6 @@ public class AddonNavigationElement extends NavigationElement {
 
   @Override
   public Class<?> getScreenClass() {
-    return ShortcutActivity.class;
+    return NameTagActivity.class;
   }
 }
