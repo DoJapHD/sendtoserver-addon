@@ -36,7 +36,7 @@ public class HelpCommand extends Command {
   public void sendMessage() {
     displayTranslatableMsg("help.msg1", NamedTextColor.GREEN);
     displayTranslatableMsg("help.msg2", NamedTextColor.GREEN);
-    displayTranslatableMsg("help.msg3", NamedTextColor.GREEN);
+    //displayTranslatableMsg("help.msg3", NamedTextColor.GREEN);
     displayTranslatableMsg("help.msg4", NamedTextColor.GREEN);
     displayTranslatableMsg("help.msg5", NamedTextColor.GREEN);
   }

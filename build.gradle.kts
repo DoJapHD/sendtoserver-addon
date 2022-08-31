@@ -62,11 +62,17 @@ addon {
     addonInfo {
         namespace("sendserveraddon")
         displayName("Send To Server")
-        author("DoJapHD, CrazySchnetzler")
-        description("Easy to use, command based way, to switch between server. '-help' for more information.")
+        author("DoJapHD")
+        description("Easy to use, command based way, to switch between server. '/ssahelp' for more information.")
         version(System.getenv().getOrDefault("VERSION", "0.0.0"))
 
-        //you can add maven dependencies here. the dependencies will then be downloaded by labymod.
+        iconUrl(
+                "https://dl.labymod.net/latest/addons/24d1*f048-f85f-4380-9207-0af65fdc43ed/icon.png",
+                project.findProject(":core")
+        );
+
+
+                //you can add maven dependencies here. the dependencies will then be downloaded by labymod.
         //mavenDependencies().add(MavenDependency("https://repo.maven.apache.org/maven2/", "com.google.guava:guava:31.1-jre"))
     }
     
