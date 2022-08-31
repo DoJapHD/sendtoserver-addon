@@ -5,10 +5,9 @@ import de.dojaphd.sendserver.core.commands.HelpCommand;
 import de.dojaphd.sendserver.core.commands.MenuOpenerCommand;
 import de.dojaphd.sendserver.core.commands.SendCommand;
 import de.dojaphd.sendserver.core.commands.ShortcutCommand;
-import de.dojaphd.sendserver.core.listener.ExampleGameTickListener;
 import de.dojaphd.sendserver.core.utils.ModColor;
+import java.util.Map;
 import net.labymod.api.addon.LabyAddon;
-import net.labymod.api.configuration.loader.Config;
 import net.labymod.api.event.client.scoreboard.TabListUpdateEvent;
 import net.labymod.api.models.addon.annotation.AddonListener;
 
@@ -17,14 +16,16 @@ import net.labymod.api.models.addon.annotation.AddonListener;
 public class SendServerAddon extends LabyAddon<AddonConfiguration> {
 
   public static SendServerAddon addon;
+  public static String Prefix =
+      ModColor.cl('7') + "[" + ModColor.cl('6') + "SendServerAddon" + ModColor.cl('7') + "] §r";
 
-  public static String Prefix = ModColor.cl('7') + "[" + ModColor.cl('6') + "SendServerAddon" + ModColor.cl('7') + "] ";
-  private Config config;
+  public static SendServerAddon getAddon() {
+    return addon;
+  }
 
   @Override
   protected void enable() {
     this.registerSettingCategory();
-
 
     this.logger().info("[Send-Server-Addon] Addon loaded.");
 
@@ -33,18 +34,10 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
     init();
   }
 
-
   private void init() {
-    this.registerListener(ExampleGameTickListener.class);
-
     this.registerCommand(SendCommand.class);
-    this.registerCommand(ShortcutCommand.class);
     this.registerCommand(HelpCommand.class);
     this.registerCommand(MenuOpenerCommand.class);
-  }
-
-  public static SendServerAddon getAddon() {
-    return addon;
   }
 
   @Override
@@ -55,15 +48,16 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
   public void reloadTabList() {
     this.labyAPI().eventBus().fire(new TabListUpdateEvent());
   }
-  
+
   public CustomNameTag getIp(String shortcut) {
     Map<String, CustomNameTag> shortcuts = addon.configuration().getCustomTags();
 
     for (String string : shortcuts.keySet()) {
-      logger().info("String: " + string);
-      if (string.equalsIgnoreCase(shortcut))
+      if (string.equalsIgnoreCase(shortcut)) {
         return shortcuts.get(string);
+      }
     }
     return null;
   }
+
 }
