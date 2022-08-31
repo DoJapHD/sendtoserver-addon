@@ -37,15 +37,18 @@ public class SendCommand extends Command {
         displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
         return true;
       }
-      CustomNameTag serverIp = addon.getIp(serverTarget);
+      CustomNameTag serverIpTag = addon.getIp(serverTarget);
 
-      if (serverIp == null) {
+      if (serverIpTag == null) {
         displayTranslatableMsg("send.notfound", NamedTextColor.RED);
         return true;
-      } else {
-        addon.labyAPI().serverController().joinServer(addon.getIp(serverTarget).getServerIp());
-        return true;
       }
+
+      String serverIp = serverIpTag.getServerIp();
+      serverIp = serverIp.replaceAll("&.", "");
+      addon.labyAPI().serverController().joinServer(serverIp);
+      return true;
+
     }
     return false;
   }
