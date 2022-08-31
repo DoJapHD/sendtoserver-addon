@@ -20,7 +20,7 @@ TextField {
     alignment-x: center;
     alignment-y: center;
 
-	  background-color: rgba(250, 250, 250, 0.3);
+	  background-color: rgba(170, 170, 170, 1.0);
 	  padding-top: 20.0;
 	  padding-left: 10.0;
 	  padding-right: 10.0;
@@ -35,15 +35,15 @@ TextField {
   }
 }
 
-NameTag {
+Shortcut {
   background-color: rgba(250, 250, 250, 0.3);
 }
 
-NameTag:hover {
+Shortcut:hover {
   background-color: rgba(200, 200, 200, 0.3);
 }
 
-NameTag:selected {
+Shortcut:selected {
   border: 1 #aaaaaa;
 
 }
@@ -70,7 +70,7 @@ NameTag:selected {
   alignment-y: center;
   space-between-entries: 15;
 
-	background-color: rgba(250, 250, 250, 0.3);
+	background-color: rgba(170, 170, 170, 1.0);
   padding: 10;
 }
 

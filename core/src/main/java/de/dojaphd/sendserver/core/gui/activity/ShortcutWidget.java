@@ -8,12 +8,12 @@ import net.labymod.api.client.gui.screen.widget.SimpleWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.ComponentWidget;
 
 @AutoWidget
-public class NameTagWidget extends SimpleWidget {
+public class ShortcutWidget extends SimpleWidget {
 
   private String shortcut;
   private CustomNameTag customNameTag;
 
-  public NameTagWidget(String shortcut, CustomNameTag customNameTag) {
+  public ShortcutWidget(String shortcut, CustomNameTag customNameTag) {
     this.shortcut = shortcut;
     this.customNameTag = customNameTag;
   }

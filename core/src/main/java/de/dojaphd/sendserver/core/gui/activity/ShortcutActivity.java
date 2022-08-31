@@ -29,11 +29,11 @@ import org.jetbrains.annotations.Nullable;
 @AutoActivity
 @Link("manage.lss")
 @Link("overview.lss")
-public class NameTagActivity extends Activity {
+public class ShortcutActivity extends Activity {
 
   private final SendServerAddon addon;
-  private final VerticalListWidget<NameTagWidget> nameTagList;
-  private final Map<String, NameTagWidget> nameTagWidgets;
+  private final VerticalListWidget<ShortcutWidget> nameTagList;
+  private final Map<String, ShortcutWidget> nameTagWidgets;
 
   private ButtonWidget removeButton;
   private ButtonWidget editButton;
@@ -46,26 +46,26 @@ public class NameTagActivity extends Activity {
   private boolean updateRequired;
 
   @Inject
-  private NameTagActivity(SendServerAddon addon) {
+  private ShortcutActivity(SendServerAddon addon) {
     this.addon = addon;
 
     this.nameTagWidgets = new HashMap<>();
     addon.configuration().getCustomTags().forEach((userName, customTag) -> {
-      this.nameTagWidgets.put(userName, new NameTagWidget(userName, customTag));
+      this.nameTagWidgets.put(userName, new ShortcutWidget(userName, customTag));
     });
 
     this.nameTagList = new VerticalListWidget<>();
     this.nameTagList.addId("name-tag-list");
-    this.nameTagList.setSelectCallback(nameTagWidget -> {
-      NameTagWidget selectedNameTag = this.nameTagList.session().getSelectedEntry();
+    this.nameTagList.setSelectCallback(shortcutWidget -> {
+      ShortcutWidget selectedNameTag = this.nameTagList.session().getSelectedEntry();
       if (Objects.isNull(selectedNameTag)
-          || selectedNameTag.getCustomTag() != nameTagWidget.getCustomTag()) {
+          || selectedNameTag.getCustomTag() != shortcutWidget.getCustomTag()) {
         this.editButton.setEnabled(true);
         this.removeButton.setEnabled(true);
       }
     });
 
-    this.nameTagList.setDoubleClickCallback(nameTagWidget -> this.setAction(Action.EDIT));
+    this.nameTagList.setDoubleClickCallback(shortcutWidget -> this.setAction(Action.EDIT));
   }
 
   @Override
@@ -74,14 +74,14 @@ public class NameTagActivity extends Activity {
 
     DivWidget listContainer = new DivWidget();
     listContainer.addId("name-tag-container");
-    for (NameTagWidget nameTagWidget : this.nameTagWidgets.values()) {
-      this.nameTagList.addChild(nameTagWidget);
+    for (ShortcutWidget shortcutWidget : this.nameTagWidgets.values()) {
+      this.nameTagList.addChild(shortcutWidget);
     }
 
     listContainer.addChild(new ScrollWidget(this.nameTagList));
     this.document().addChild(listContainer);
 
-    NameTagWidget selectedNameTag = this.nameTagList.session().getSelectedEntry();
+    ShortcutWidget selectedNameTag = this.nameTagList.session().getSelectedEntry();
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("overview-button-menu");
 
@@ -109,7 +109,7 @@ public class NameTagActivity extends Activity {
     switch (this.action) {
       default:
       case ADD:
-        NameTagWidget newCustomNameTag = new NameTagWidget("", CustomNameTag.createDefault());
+        ShortcutWidget newCustomNameTag = new ShortcutWidget("", CustomNameTag.createDefault());
         overlayWidget = this.initializeManageContainer(newCustomNameTag);
         break;
       case EDIT:
@@ -124,7 +124,7 @@ public class NameTagActivity extends Activity {
     this.document().addChild(manageContainer);
   }
 
-  private FlexibleContentWidget initializeRemoveContainer(NameTagWidget nameTagWidget) {
+  private FlexibleContentWidget initializeRemoveContainer(ShortcutWidget shortcutWidget) {
     this.inputWidget = new FlexibleContentWidget();
     this.inputWidget.addId("remove-container");
 
@@ -137,8 +137,8 @@ public class NameTagActivity extends Activity {
     menu.addId("remove-button-menu");
 
     menu.addEntry(ButtonWidget.i18n("labymod.ui.button.remove", () -> {
-      this.addon.configuration().getCustomTags().remove(nameTagWidget.getShortcut());
-      this.nameTagWidgets.remove(nameTagWidget.getShortcut());
+      this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
+      this.nameTagWidgets.remove(shortcutWidget.getShortcut());
       this.nameTagList.session().setSelectedEntry(null);
       this.setAction(null);
       this.updateRequired = true;
@@ -150,7 +150,7 @@ public class NameTagActivity extends Activity {
     return this.inputWidget;
   }
 
-  private DivWidget initializeManageContainer(NameTagWidget nameTagWidget) {
+  private DivWidget initializeManageContainer(ShortcutWidget shortcutWidget) {
     DivWidget inputContainer = new DivWidget();
     inputContainer.addId("input-container");
 
@@ -165,7 +165,7 @@ public class NameTagActivity extends Activity {
     nameList.addId("input-name-list");
 
     TextFieldWidget nameTextField = new TextFieldWidget();
-    nameTextField.setText(nameTagWidget.getShortcut());
+    nameTextField.setText(shortcutWidget.getShortcut());
     nameTextField.updateListener(newValue -> {
       if (newValue.equals(this.lastUserName)) {
         return;
@@ -186,7 +186,7 @@ public class NameTagActivity extends Activity {
     customNameList.addId("input-name-list");
 
     TextFieldWidget customTextField = new TextFieldWidget();
-    customTextField.setText(nameTagWidget.getCustomTag().getServerIp());
+    customTextField.setText(shortcutWidget.getCustomTag().getServerIp());
     customTextField.updateListener(newValue -> {
       if (newValue.equals(this.lastCustomName)) {
         return;
@@ -202,17 +202,17 @@ public class NameTagActivity extends Activity {
     buttonList.addId("edit-button-menu");
 
     buttonList.addEntry(ButtonWidget.i18n("labymod.ui.button.done", () -> {
-      if (nameTagWidget.getShortcut().length() == 0) {
-        this.nameTagWidgets.put(nameTextField.getText(), nameTagWidget);
-        this.nameTagList.session().setSelectedEntry(nameTagWidget);
+      if (shortcutWidget.getShortcut().length() == 0) {
+        this.nameTagWidgets.put(nameTextField.getText(), shortcutWidget);
+        this.nameTagList.session().setSelectedEntry(shortcutWidget);
       }
 
-      this.addon.configuration().getCustomTags().remove(nameTagWidget.getShortcut());
-      CustomNameTag customNameTag = nameTagWidget.getCustomTag();
+      this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
+      CustomNameTag customNameTag = shortcutWidget.getCustomTag();
       customNameTag.setServerIp(customTextField.getText());
       this.addon.configuration().getCustomTags().put(nameTextField.getText(), customNameTag);
-      nameTagWidget.setShortcut(nameTextField.getText());
-      nameTagWidget.setCustomTag(customNameTag);
+      shortcutWidget.setShortcut(nameTextField.getText());
+      shortcutWidget.setCustomTag(customNameTag);
       this.setAction(null);
 
       this.updateRequired = true;
