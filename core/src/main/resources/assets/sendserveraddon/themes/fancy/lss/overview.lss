@@ -37,7 +37,7 @@
   }
 }
 
-NameTag {
+Shortcut {
   width: 100%;
   height: 24;
 
@@ -52,13 +52,13 @@ NameTag {
   }
 
   .name {
-    left: 22;
-    top: 2;
+    left: 5;
+    top: 1;
   }
 
   .custom-name {
-    left: 22;
-    top: 13;
+    left: 5;
+    top: 12;
   }
 
   .input-list {

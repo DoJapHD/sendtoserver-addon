@@ -1,7 +1,7 @@
 package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
-import de.dojaphd.sendserver.core.CustomNameTag;
+import de.dojaphd.sendserver.core.ShortcutManager;
 import de.dojaphd.sendserver.core.SendServerAddon;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -37,15 +37,18 @@ public class SendCommand extends Command {
         displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
         return true;
       }
-      CustomNameTag serverIp = addon.getIp(serverTarget);
+      ShortcutManager serverIpTag = addon.getIp(serverTarget);
 
-      if (serverIp == null) {
+      if (serverIpTag == null) {
         displayTranslatableMsg("send.notfound", NamedTextColor.RED);
         return true;
-      } else {
-        addon.labyAPI().serverController().joinServer(addon.getIp(serverTarget).getServerIp());
-        return true;
       }
+
+      String serverIp = serverIpTag.getServerIp();
+      serverIp = serverIp.replaceAll("&.", "");
+      addon.labyAPI().serverController().joinServer(serverIp);
+      return true;
+
     }
     return false;
   }

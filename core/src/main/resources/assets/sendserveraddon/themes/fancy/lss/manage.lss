@@ -36,12 +36,12 @@ TextField {
   }
 }
 
-NameTag {
+Shortcut {
   background-color: rgba(17,17,17,0.55);
   border-radius: 5;
 }
 
-NameTag:hover {
+Shortcut:hover {
   background-color: rgba(17,17,17,0.70);
 }
 
