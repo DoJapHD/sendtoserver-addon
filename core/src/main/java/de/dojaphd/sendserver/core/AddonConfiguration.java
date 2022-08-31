@@ -1,6 +1,6 @@
 package de.dojaphd.sendserver.core;
 
-import de.dojaphd.sendserver.core.gui.activity.ShortcutActivity;
+import de.dojaphd.sendserver.core.gui.activity.NameTagActivity;
 import java.util.HashMap;
 import java.util.Map;
 import net.labymod.api.addon.AddonConfig;
@@ -18,20 +18,20 @@ public final class AddonConfiguration extends AddonConfig {
   @SwitchSetting
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
-  private final Map<String, ShortcutManager> customTags = new HashMap<>();
+  private final Map<String, CustomNameTag> customTags = new HashMap<>();
 
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
   }
 
 
-  public Map<String, ShortcutManager> getCustomTags() {
+  public Map<String, CustomNameTag> getCustomTags() {
     return this.customTags;
   }
 
   @MethodOrder(after = "enabled")
   @AddonActivitySetting
   public Activity openNameTags() {
-    return LabyGuice.getInstance(ShortcutActivity.class);
+    return LabyGuice.getInstance(NameTagActivity.class);
   }
 }
