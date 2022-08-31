@@ -26,22 +26,19 @@ public enum ModColor {
   MAGIC('k'),
   STRIKETHROUGH('m');
 
-  public static final String[] COLOR_CODES = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "k", "m", "n", "l", "o", "r"};
+  public static final String[] COLOR_CODES = new String[]{"0", "1", "2", "3", "4", "5", "6", "7",
+      "8", "9", "a", "b", "c", "d", "e", "f", "k", "m", "n", "l", "o", "r"};
   public static final char COLOR_CHAR_PREFIX = '§';
-  private char colorChar;
+  private final char colorChar;
   private Color color;
 
-  private ModColor(char colorChar, int r, int g, int b) {
+  ModColor(char colorChar, int r, int g, int b) {
     this.colorChar = colorChar;
     this.color = new Color(r, g, b);
   }
 
-  private ModColor(char colorChar) {
+  ModColor(char colorChar) {
     this.colorChar = colorChar;
-  }
-
-  public String toString() {
-    return String.valueOf('§') + this.colorChar;
   }
 
   public static String cl(String colorChar) {
@@ -54,14 +51,6 @@ public enum ModColor {
 
   private static String getColorCharPrefix() {
     return String.valueOf('§');
-  }
-
-  public Color getColor() {
-    return this.color;
-  }
-
-  public char getColorChar() {
-    return this.colorChar;
   }
 
   public static String removeColor(String string) {
@@ -85,7 +74,7 @@ public enum ModColor {
   }
 
   public static Color changeBrightness(Color color, float fraction) {
-    float red = (float)color.getRed() + 255.0F * fraction;
+    float red = (float) color.getRed() + 255.0F * fraction;
     if (red > 255.0F) {
       red = 255.0F;
     }
@@ -94,7 +83,7 @@ public enum ModColor {
       red = 0.0F;
     }
 
-    float green = (float)color.getGreen() + 255.0F * fraction;
+    float green = (float) color.getGreen() + 255.0F * fraction;
     if (green > 255.0F) {
       green = 255.0F;
     }
@@ -103,7 +92,7 @@ public enum ModColor {
       green = 0.0F;
     }
 
-    float blue = (float)color.getBlue() + 255.0F * fraction;
+    float blue = (float) color.getBlue() + 255.0F * fraction;
     if (blue > 255.0F) {
       blue = 255.0F;
     }
@@ -112,7 +101,7 @@ public enum ModColor {
       blue = 0.0F;
     }
 
-    return new Color((int)red, (int)green, (int)blue);
+    return new Color((int) red, (int) green, (int) blue);
   }
 
   public static Color getColorByString(String color) {
@@ -121,5 +110,17 @@ public enum ModColor {
     } else {
       return color.equals("-1") ? null : new Color(Integer.parseInt(color));
     }
+  }
+
+  public String toString() {
+    return String.valueOf('§') + this.colorChar;
+  }
+
+  public Color getColor() {
+    return this.color;
+  }
+
+  public char getColorChar() {
+    return this.colorChar;
   }
 }
