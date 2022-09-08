@@ -52,12 +52,12 @@ Shortcut {
   }
 
   .name {
-    left: 22;
+    left: 5;
     top: 2;
   }
 
   .custom-name {
-    left: 22;
+    left: 5;
     top: 13;
   }
 
