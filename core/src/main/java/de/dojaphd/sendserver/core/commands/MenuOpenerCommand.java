@@ -2,17 +2,15 @@ package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
-import de.dojaphd.sendserver.core.gui.activity.AddonNavigationElement;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
-import net.labymod.api.Laby;
 import net.labymod.api.client.chat.command.Command;
 import net.labymod.api.util.I18n;
 
 public class MenuOpenerCommand extends Command {
 
-  AddonNavigationElement addonNavigationElement;
+  //AddonNavigationElement addonNavigationElement;
   String syntax = "/ssashortcuts";
 
   @Inject
@@ -34,7 +32,7 @@ public class MenuOpenerCommand extends Command {
       }
       //System.out.println("Passt");
       try {
-        Laby.labyAPI().navigationService().updateLastOpenedElement(addonNavigationElement);
+        //Laby.labyAPI().navigationService().updateLastOpenedElement(addonNavigationElement);
 
       } catch (Exception e) {
         System.out.println(e);
