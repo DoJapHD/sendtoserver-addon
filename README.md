@@ -4,7 +4,8 @@
 <h3>🤖 How it works</h3>
 <p>SendToServer is an addon developed for <a href="https://labymod.net/">LabyMod</a> that enables you to switch servers via a shortcut set in the addon settings.</p>
 
-[Placeholder] Image ?
+![LM4-SendServer-ChatMSGs](https://user-images.githubusercontent.com/63593457/189342973-e7cc6672-7f31-44e2-81a6-b2a68078ae7d.png)
+
 
 <p>All you need to do to start switching servers with a shortcut is adding shortcuts in the addon settings.</p>
 <br>
@@ -12,17 +13,20 @@
 <h3>⚙️ Configuration</h3>
 <b>Step 1</b> › Download the addon from the LabyMod addon store. If you want to use an unofficial version, there are sometimes unreleased features <a href="https://github.com/DoJapHD/sendtoserver-addon/releases">here</a>. Please note, that you won't receive any support for using or installing unofficial versions.
 
-[Placeholder] Image LM3-SendServerStoreBig
+![LM3-SendServer-StoreBig](https://user-images.githubusercontent.com/63593457/189341745-1ffa7bd2-502f-43e6-87e1-91cafffe3be9.png)
+
 
 <br>
 <b>Step 2</b> › If you're asked to restart your game, please do so in order to activate the addon correctly. Now head over to the configuration by clicking on the small <code>⚙️</code> icon to finish the setup of your addon.
 
-[Placeholder] Image LM3-SendServer-Store
+![LM3-SendServer-Store](https://user-images.githubusercontent.com/63593457/189341854-52752853-2459-447d-b44b-7f87f0fca570.png)
+
 
 <br>
 <b>Step 3</b> › Now you can set up everything you need. Make sure that you also have <b>enabled</b> the addon!
+<br>
 
-[Placeholder] Image LM4-SendServer-AddonSettings
+![LM4-SendServer-AddonSettings](https://user-images.githubusercontent.com/63593457/189341884-70313e18-14bd-4609-9d0c-3c3ab9186d3b.png)
 
 
 <br>
