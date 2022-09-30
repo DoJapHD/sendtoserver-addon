@@ -26,9 +26,9 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalLi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import org.jetbrains.annotations.Nullable;
 
-@AutoActivity
 @Link("manage.lss")
 @Link("overview.lss")
+@AutoActivity
 public class ShortcutActivity extends Activity {
 
   private final SendServerAddon addon;
@@ -249,16 +249,16 @@ public class ShortcutActivity extends Activity {
   }
 
   @Override
-  public <T extends LabyScreen> @Nullable T renew() {
-    return null;
-  }
-
-  @Override
   public void onCloseScreen() {
     super.onCloseScreen();
     if (this.updateRequired) {
       this.addon.reloadTabList();
     }
+  }
+
+  @Override
+  public <T extends LabyScreen> @Nullable T renew() {
+    return null;
   }
 
   private enum Action {

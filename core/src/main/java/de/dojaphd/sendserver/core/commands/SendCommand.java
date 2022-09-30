@@ -18,8 +18,6 @@ public class SendCommand extends Command {
   @Inject
   private SendCommand() {
     super("ssasend", "ssasend");
-
-    this.translationKey("sendserveraddon.commands");
   }
 
   //Laby.labyAPI().minecraft().chatExecutor().displayClientMessage("Test");
@@ -34,13 +32,13 @@ public class SendCommand extends Command {
       try {
         serverTarget = arguments[0];
       } catch (IndexOutOfBoundsException exception) {
-        displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
+        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED, syntax);
         return true;
       }
       ShortcutManager serverIpTag = addon.getIp(serverTarget);
 
       if (serverIpTag == null) {
-        displayTranslatableMsg("send.notfound", NamedTextColor.RED);
+        displayTranslatableMsg("sendserveraddon.commands.send.notfound", NamedTextColor.RED);
         return true;
       }
 
@@ -55,9 +53,6 @@ public class SendCommand extends Command {
 
   private void displayTranslatableMsg(String key, TextColor textColor, Object... arguments) {
     String translationKey = key;
-    if (this.translationKey != null) {
-      translationKey = this.translationKey + "." + key;
-    }
 
     String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
     this.displayMessage(Component.text(message, textColor));
