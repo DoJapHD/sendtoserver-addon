@@ -15,8 +15,6 @@ public class HelpCommand extends Command {
   @Inject
   private HelpCommand() {
     super("ssahelp", "ssahelp");
-
-    this.translationKey("sendserveraddon.commands");
   }
 
 
@@ -24,9 +22,10 @@ public class HelpCommand extends Command {
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssahelp")) {
       if (arguments.length != 0) {
-        displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
+        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED, syntax);
+      } else {
+        sendMessage();
       }
-      sendMessage();
       return true;
     }
     return false;
@@ -34,18 +33,15 @@ public class HelpCommand extends Command {
 
 
   public void sendMessage() {
-    displayTranslatableMsg("help.msg1", NamedTextColor.GREEN);
-    displayTranslatableMsg("help.msg2", NamedTextColor.GREEN);
+    displayTranslatableMsg("sendserveraddon.commands.help.msg1", NamedTextColor.GREEN);
+    displayTranslatableMsg("sendserveraddon.commands.help.msg2", NamedTextColor.GREEN);
     //displayTranslatableMsg("help.msg3", NamedTextColor.GREEN);
-    displayTranslatableMsg("help.msg4", NamedTextColor.GREEN);
-    displayTranslatableMsg("help.msg5", NamedTextColor.GREEN);
+    displayTranslatableMsg("sendserveraddon.commands.help.msg4", NamedTextColor.GREEN);
+    displayTranslatableMsg("sendserveraddon.commands.help.msg5", NamedTextColor.GREEN);
   }
 
   private void displayTranslatableMsg(String key, TextColor textColor, Object... arguments) {
     String translationKey = key;
-    if (this.translationKey != null) {
-      translationKey = this.translationKey + "." + key;
-    }
 
     if(key.equals("help.msg5")) {
       String translation = I18n.translate("sendserveraddon.commands.help.msg1");

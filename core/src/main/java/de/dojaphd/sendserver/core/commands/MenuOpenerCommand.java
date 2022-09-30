@@ -16,8 +16,6 @@ public class MenuOpenerCommand extends Command {
   @Inject
   private MenuOpenerCommand() {
     super("ssashortcuts", "ssashortcuts");
-
-    this.translationKey("sendserveraddon.commands");
   }
 
   /**
@@ -28,7 +26,7 @@ public class MenuOpenerCommand extends Command {
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssashortcuts")) {
       if (arguments.length != 0) {
-        displayTranslatableMsg("general.syntax", NamedTextColor.RED, syntax);
+        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED, syntax);
       }
       //System.out.println("Passt");
       try {
@@ -47,9 +45,6 @@ public class MenuOpenerCommand extends Command {
 
   private void displayTranslatableMsg(String key, TextColor textColor, Object... arguments) {
     String translationKey = key;
-    if (this.translationKey != null) {
-      translationKey = this.translationKey + "." + key;
-    }
 
     String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
     this.displayMessage(Component.text(message, textColor));
