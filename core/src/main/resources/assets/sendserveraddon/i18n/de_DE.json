@@ -1,0 +1,46 @@
+{
+  "sendserveraddon": {
+    "settings": {
+      "name": "Send To Server",
+      "enabled": {
+        "name": "Aktiviert"
+      },
+      "openNameTags": {
+        "name": "Shortcuts bearbeiten"
+      }
+    },
+    "gui": {
+      "manage": {
+        "add": "Neuen Shortcut hinzufügen",
+        "name": "Shortcut",
+        "custom": {
+          "name": "Server IP"
+        },
+        "enabled": {
+          "name": "Aktiviert"
+        },
+        "remove": {
+          "title": "Möchtest du diesen Eintrag wirklich löschen?"
+        }
+      },
+      "navigation": {
+        "name": "Send To Server"
+      }
+    },
+    "commands": {
+      "send": {
+        "notfound": "§cKonnte den genutzten Shortcut nicht finden. Hast du diesen bereits hinzugefügt?"
+      },
+      "general": {
+        "syntax": "§cSyntax: %s"
+      },
+      "help": {
+        "msg1": "§a--------- §6Hilfe §a---------",
+        "msg2": "§6/ssasend [shortcut] §7» §aVerbinde dich mit einem Server über einen Shortcut.",
+        "msg3": "§6/ssashortcuts §7» §aÖffnet das Shorcut-Editor-Menü.",
+        "msg4": "§6/ssahelp §7» §aSendet diese Hilfe-Nachricht.",
+        "msg5": "§a-----------------------"
+      }
+    }
+  }
+}

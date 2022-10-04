@@ -1,5 +1,5 @@
-<h1 align="center">SendToServer <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/322/linked-paperclips_1f587-fe0f.png" width="30"></h1>
-<p align="center">Never again to the server list! <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/129/fire_1f525.png" width="15"></p>
+<h1 align="center">SendToServer <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/322/linked-paperclips_1f587-fe0f.png" width="30" alt="Link emoji"></h1>
+<p align="center">Never again to the server list! <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/129/fire_1f525.png" width="15" alt="Fire emoji"></p>
 
 <h3>🤖 How it works</h3>
 <p>SendToServer is an addon developed for <a href="https://labymod.net/">LabyMod</a> that enables you to switch servers via a shortcut set in the addon settings.</p>
@@ -106,6 +106,10 @@ Anything you want to improve or add? I always appreciate help, bug reports and c
         </tr>
         <tr>
             <td><a href="https://laby.net/@2d5f3be8-6635-4c9a-a2ac-01db6ffd4344">MrMesseeks</a></td>
+            <td>Translating</td>
+        </tr>
+        <tr>
+            <td><a href="https://laby.net/@a3d27869-a942-4ffd-a2a2-0523426f59d2">LondonView</a></td>
             <td>Translating</td>
         </tr>
         <tr>

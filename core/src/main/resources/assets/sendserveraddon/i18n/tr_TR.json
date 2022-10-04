@@ -1,0 +1,46 @@
+{
+  "sendserveraddon": {
+    "settings": {
+      "name": "Sunucuya Gönder",
+      "enabled": {
+        "name": "Etkin"
+      },
+      "openNameTags": {
+        "name": "Kısayolları düzenle"
+      }
+    },
+    "gui": {
+      "manage": {
+        "add": "Yeni bir kısayol ekle",
+        "name": "Kısayol",
+        "custom": {
+          "name": "Sunucu IP"
+        },
+        "enabled": {
+          "name": "Etkin"
+        },
+        "remove": {
+          "title": "Bu kaydı silmek istediğinden emin misin?"
+        }
+      },
+      "navigation": {
+        "name": "Sunucuya Gönder"
+      }
+    },
+    "commands": {
+      "send": {
+        "notfound": "§cKullanılmış kısayol bulunamadı. Zaten onu ekledin mi?"
+      },
+      "general": {
+        "syntax": "§cSözdizimi: %s"
+      },
+      "help": {
+        "msg1": "§a--------- §6Yardım §a---------",
+        "msg2": "§6/ssasend [shortcut] §7» §aBir kısayol kullanarak bir sunucuya bağlan.",
+        "msg3": "§6/ssashortcuts §7» §aKısayol düzenleyici menüsünü açar.",
+        "msg4": "§6/ssahelp §7» §aBu yardım mesajını gönderir.",
+        "msg5": "§a-----------------------"
+      }
+    }
+  }
+}

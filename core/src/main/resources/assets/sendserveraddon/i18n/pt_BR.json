@@ -1,0 +1,46 @@
+{
+  "sendserveraddon": {
+    "settings": {
+      "name": "Sent To Server",
+      "enabled": {
+        "name": "Ativado"
+      },
+      "openNameTags": {
+        "name": "Editar atalhos"
+      }
+    },
+    "gui": {
+      "manage": {
+        "add": "Adicionar um novo atalho",
+        "name": "Atalho",
+        "custom": {
+          "name": "IP do servidor"
+        },
+        "enabled": {
+          "name": "Ativado"
+        },
+        "remove": {
+          "title": "Você tem certeza que deseja deletar este atalho?"
+        }
+      },
+      "navigation": {
+        "name": "Sent To Server"
+      }
+    },
+    "commands": {
+      "send": {
+        "notfound": "§cNão foi possível encontrar o atalho usado. Você já adicionou ele?"
+      },
+      "general": {
+        "syntax": "§cSintaxe: %s"
+      },
+      "help": {
+        "msg1": "§a--------- §6Ajuda §a---------",
+        "msg2": "§6/ssasend [shortcut] §7» §aConecte-se a um servidor usando um atalho.",
+        "msg3": "§6/ssashortcuts §7» §aAbre o menu do editor de atalhos.",
+        "msg4": "§6/ssahelp §7» §aEnvia esta mensagem de ajuda.",
+        "msg5": "§a-----------------------"
+      }
+    }
+  }
+}
