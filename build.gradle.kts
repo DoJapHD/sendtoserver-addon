@@ -66,10 +66,7 @@ addon {
         description("Easy to use, command based way, to switch between server. '/ssahelp' for more information.")
         version(System.getenv().getOrDefault("VERSION", "0.0.0"))
 
-        iconUrl(
-                "https://dl.labymod.net/latest/addons/24d1*f048-f85f-4380-9207-0af65fdc43ed/icon.png",
-                project.findProject(":core")
-        )
+        iconUrl("https://i.imgur.com/QdXgGk9.png", project(":core"))
 
 
                 //you can add maven dependencies here. the dependencies will then be downloaded by labymod.
