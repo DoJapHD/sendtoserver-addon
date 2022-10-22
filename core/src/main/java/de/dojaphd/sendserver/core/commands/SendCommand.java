@@ -1,8 +1,8 @@
 package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
-import de.dojaphd.sendserver.core.ShortcutManager;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import de.dojaphd.sendserver.core.ShortcutManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
@@ -20,10 +20,6 @@ public class SendCommand extends Command {
     super("ssasend", "ssasend");
   }
 
-  //Laby.labyAPI().minecraft().chatExecutor().displayClientMessage("Test");
-  //Laby.labyAPI().minecraft().chatExecutor().copyToClipboard("CopyTest");
-
-
   @Override
   public boolean execute(String prefix, String[] arguments) {
 
@@ -32,7 +28,8 @@ public class SendCommand extends Command {
       try {
         serverTarget = arguments[0];
       } catch (IndexOutOfBoundsException exception) {
-        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED, syntax);
+        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED,
+            syntax);
         return true;
       }
       ShortcutManager serverIpTag = addon.getIp(serverTarget);
