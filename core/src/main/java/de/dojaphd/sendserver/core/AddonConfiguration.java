@@ -38,11 +38,4 @@ public final class AddonConfiguration extends AddonConfig {
   public Activity openNameTags() {
     return LabyGuice.getInstance(ShortcutActivity.class);
   }
-
-  @MultiKeyBindSetting
-  public final ConfigProperty<Key> key = new ConfigProperty<>(Key.NONE);
-
-  public ConfigProperty<Key> getKeybind() {
-    return this.key;
-  }
 }

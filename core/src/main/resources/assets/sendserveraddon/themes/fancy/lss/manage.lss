@@ -87,6 +87,7 @@ Shortcut:selected {
 	background-color: rgba(20, 20, 20, 1.0);
   padding: 10;
   border-radius: 5;
+  border: 1 #008FE8;
 }
 
 .remove-confirmation {

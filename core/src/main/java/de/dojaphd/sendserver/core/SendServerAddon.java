@@ -5,8 +5,6 @@ import de.dojaphd.sendserver.core.commands.HelpCommand;
 import de.dojaphd.sendserver.core.commands.MenuOpenerCommand;
 import de.dojaphd.sendserver.core.commands.SendCommand;
 import de.dojaphd.sendserver.core.gui.activity.ShortcutActivity;
-import de.dojaphd.sendserver.core.listener.KeyPressListener;
-import de.dojaphd.sendserver.core.listener.TickListener;
 import de.dojaphd.sendserver.core.utils.ModColor;
 import java.util.Map;
 import net.labymod.api.Laby;
@@ -43,9 +41,6 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
     this.registerCommand(SendCommand.class);
     this.registerCommand(HelpCommand.class);
     this.registerCommand(MenuOpenerCommand.class);
-
-    this.registerListener(KeyPressListener.class);
-    this.registerListener(TickListener.class);
   }
 
   @Override
@@ -77,5 +72,7 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
   private void openActivity(ScreenInstance screenInstance) {
     Laby.labyAPI().minecraft().executeNextTick(
         () -> Laby.labyAPI().minecraft().minecraftWindow().displayScreen(screenInstance));
+
+
   }
 }
