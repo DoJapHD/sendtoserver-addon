@@ -1,8 +1,8 @@
 package de.dojaphd.sendserver.core.gui.activity;
 
 import com.google.inject.Inject;
-import de.dojaphd.sendserver.core.ShortcutManager;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import de.dojaphd.sendserver.core.ShortcutManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -44,6 +44,7 @@ public class ShortcutActivity extends Activity {
 
   private Action action;
   private boolean updateRequired;
+  private boolean background = false;
 
   @Inject
   private ShortcutActivity(SendServerAddon addon) {
@@ -76,6 +77,13 @@ public class ShortcutActivity extends Activity {
     listContainer.addId("name-tag-container");
     for (ShortcutWidget shortcutWidget : this.nameTagWidgets.values()) {
       this.nameTagList.addChild(shortcutWidget);
+    }
+
+    if (background) {
+      DivWidget containerBackground = new DivWidget();
+      containerBackground.addId("container-background");
+      containerBackground.addChild(listContainer);
+      this.document().addChild(containerBackground);
     }
 
     listContainer.addChild(new ScrollWidget(this.nameTagList));
@@ -254,6 +262,10 @@ public class ShortcutActivity extends Activity {
     if (this.updateRequired) {
       this.addon.reloadTabList();
     }
+  }
+
+  public void setBackground(boolean background) {
+    this.background = background;
   }
 
   @Override
