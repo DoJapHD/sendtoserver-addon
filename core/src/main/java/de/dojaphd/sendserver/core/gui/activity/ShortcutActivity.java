@@ -218,8 +218,21 @@ public class ShortcutActivity extends Activity {
       this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
       ShortcutManager shortcutManager = shortcutWidget.getCustomTag();
       shortcutManager.setServerIp(customTextField.getText());
-      this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
-      shortcutWidget.setShortcut(nameTextField.getText());
+      if (Objects.equals(nameTextField.getText(), "")) {
+        //Wenn oben nicht eingefüllt
+        this.addon.configuration().getCustomTags()
+            .put(shortcutManager.getServerIp(), shortcutManager);
+        shortcutWidget.setShortcut(shortcutManager.getServerIp());
+      } else if (Objects.equals(customTextField.getText(), "")) {
+        //Wenn unten nicht eingefüllt
+        shortcutManager.setServerIp(nameTextField.getText());
+        this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
+      } else {
+        //Wenn beide eingefüllt
+        this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
+        shortcutWidget.setShortcut(nameTextField.getText());
+      }
+
       shortcutWidget.setCustomTag(shortcutManager);
       this.setAction(null);
 
@@ -259,9 +272,7 @@ public class ShortcutActivity extends Activity {
   @Override
   public void onCloseScreen() {
     super.onCloseScreen();
-    if (this.updateRequired) {
-      this.addon.reloadTabList();
-    }
+    this.addon.reloadShortcutsList();
   }
 
   public void setBackground(boolean background) {

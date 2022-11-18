@@ -116,7 +116,11 @@ Shortcut:selected {
   margin-top: 20;
 }
 
-Button:hover {
-  background-color: rgba(160,160,160,0.55);
+
+Button:enabled.button:hover {
+  background-color: rgba(160,160,160,0.55) !important;
+}
+Button:not(:active).button:hover {
+  background-color: 1343822105;
 }
 

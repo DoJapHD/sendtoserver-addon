@@ -12,7 +12,7 @@ import net.labymod.api.util.I18n;
 
 public class MenuOpenerCommand extends Command {
 
-  //AddonNavigationElement addonNavigationElement;
+  public static SendServerAddon addon;
   String syntax = "/ssashortcuts";
 
   @Inject
@@ -20,23 +20,21 @@ public class MenuOpenerCommand extends Command {
     super("ssashortcuts", "ssashortcuts");
   }
 
-  /**
-   * Currently not working as no method found to implement idea
-   **/
-
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssashortcuts")) {
       if (arguments.length != 0) {
         displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED,
             syntax);
-      }
-      try {
-        ShortcutActivity activity = LabyGuice.getInstance(ShortcutActivity.class);
-        activity.setBackground(true);
-        openActivity(activity);
-      } catch (Exception e) {
-        System.out.println(e);
+      } else {
+        try {
+          ShortcutActivity activity = LabyGuice.getInstance(ShortcutActivity.class);
+          activity.setBackground(true);
+          openActivity(activity);
+          this.labyAPI.hudWidgetRegistry().saveConfig();
+        } catch (Exception e) {
+          addon.logger().error(e.toString());
+        }
       }
       return true;
     }
@@ -49,5 +47,6 @@ public class MenuOpenerCommand extends Command {
     String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
     this.displayMessage(Component.text(message, textColor));
   }
+
 
 }

@@ -10,7 +10,7 @@ import java.util.Map;
 import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.gui.screen.ScreenInstance;
-import net.labymod.api.event.client.scoreboard.TabListUpdateEvent;
+import net.labymod.api.event.labymod.config.ConfigurationSaveEvent;
 import net.labymod.api.inject.LabyGuice;
 import net.labymod.api.models.addon.annotation.AddonListener;
 
@@ -48,8 +48,8 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
     return AddonConfiguration.class;
   }
 
-  public void reloadTabList() {
-    this.labyAPI().eventBus().fire(new TabListUpdateEvent());
+  public void reloadShortcutsList() {
+    this.labyAPI().eventBus().fire(new ConfigurationSaveEvent());
   }
 
   public ShortcutManager getIp(String shortcut) {

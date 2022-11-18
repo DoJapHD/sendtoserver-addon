@@ -38,8 +38,8 @@
 }
 
 Shortcut {
-  width: 100%;
   height: 24;
+  margin-top: 2;
 
   .avatar {
     left: 4;

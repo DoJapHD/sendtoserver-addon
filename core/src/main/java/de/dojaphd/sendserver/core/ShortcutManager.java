@@ -7,7 +7,7 @@ public class ShortcutManager {
 
   private String serverIp;
 
-  private ShortcutManager(String serverIp) {
+  public ShortcutManager(String serverIp) {
     this.serverIp = serverIp;
   }
 

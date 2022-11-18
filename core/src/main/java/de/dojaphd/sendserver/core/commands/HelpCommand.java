@@ -35,7 +35,7 @@ public class HelpCommand extends Command {
   public void sendMessage() {
     displayTranslatableMsg("sendserveraddon.commands.help.msg1", NamedTextColor.GREEN);
     displayTranslatableMsg("sendserveraddon.commands.help.msg2", NamedTextColor.GREEN);
-    //displayTranslatableMsg("help.msg3", NamedTextColor.GREEN);
+    displayTranslatableMsg("sendserveraddon.commands.help.msg3", NamedTextColor.GREEN);
     displayTranslatableMsg("sendserveraddon.commands.help.msg4", NamedTextColor.GREEN);
     displayTranslatableMsg("sendserveraddon.commands.help.msg5", NamedTextColor.GREEN);
   }
@@ -51,7 +51,7 @@ public class HelpCommand extends Command {
       for (int i = 0; i < HelpWorldlengthSecondSplitLength-5; i++) {
         sb.append("-");
       }
-      String message = SendServerAddon.Prefix + sb.toString();
+      String message = SendServerAddon.Prefix + sb;
       this.displayMessage(Component.text(message, textColor));
     } else {
       String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
