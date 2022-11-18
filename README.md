@@ -42,47 +42,58 @@
             <td><b>📑 Status</b></td>            
             <td><b>🎉 Feature</b></td>
             <td><b>🗓️ Version</b></td>
+            <td><b>🏁 Store</b></td>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>💖 Released</td>            
+            <td>Initial Release</td>            
             <td>Switch server with shortcut system</td>
             <td align="center"><b>v1.0 (LM3)</b></td>
+            <td>💖 Released</td>
         </tr>
         <tr>
             <td>➕ Added</td>
             <td><code>-send</code>, <code>-help</code> and <code>-shortcut</code> commands</td>
             <td align="center"><b>v1.0 (LM3)</b></td>
+            <td>💖 Released</td>
         </tr>
         <tr>
             <td>➖ Removed</td>
             <td><code>-send</code>, <code>-help</code> and <code>-shortcut</code> commands</td>
             <td align="center"><b>v1.0</b></td>
+            <td>💖 Released</td>
         </tr>
         <tr>
             <td>➕ Added</td>
             <td><code>/ssasend</code> and <code>/ssahelp</code> commands</td>
             <td align="center"><b>v1.0</b></td>
+            <td>💖 Released</td>
         </tr>
         <tr>
-            <td>🕑 Pending</td>            
-            <td>Open shorcut editor via command</td>
-            <td align="center"><b>—</b></td>
+            <td>➕ Added</td>            
+            <td>Open shorcut editor via command <code>/ssashortcuts</code></td>
+            <td align="center"><b>v1.1</b></td>
+            <td>🎉 Ready for Release</td>
         </tr>
         <tr>
             <td>💡 Planned</td>            
             <td><b>If you have any ideas, feel free to contact me! </b></td>
             <td align="center"><b>—</b></td>
+            <td align="center"><b>—</b></td>
         </tr>
     </tbody>
 </table>
 
-<code><b>💡 Planned</b> = Not even started yet / <b>🕑 Pending</b> Currently working on it / <b>🎉 Ready for Release</b> = Feature implemented with an update but not online at the addon store yet / <b>💖 Released</b> = Features are available at the latest version from the addon store / <b>🛑 Canceled</b> = Feature won't be implemented</code>
+<code><b>💡 Planned</b> = Not even started yet / <b>🕑 Pending</b> Currently working on it / <b>🎉
+Ready for Release</b> = Feature implemented with an update but not online at the addon store yet /
+💖 <b>Released</b> = Features are available at the latest version from the addon store / <b>🛑
+Canceled</b> = Feature won't be implemented</code>
 <br>
 <br>
 <h3>🤝 Contributing</h3>
-Anything you want to improve or add? I always appreciate help, bug reports and constructive criticism! :)
+Anything you want to improve or add? I always appreciate help, bug reports and constructive
+criticism! :)
 <br>Let me know about anything in a pull-request, an issue or a short discord message!
 <br>
 <br>
@@ -109,7 +120,7 @@ Anything you want to improve or add? I always appreciate help, bug reports and c
             <td>Translating</td>
         </tr>
         <tr>
-            <td><a href="https://laby.net/@a3d27869-a942-4ffd-a2a2-0523426f59d2">LondonView</a></td>
+            <td><a href="https://laby.net/@a3d27869-a942-4ffd-a2a2-0523426f59d2">WalriderTime</a></td>
             <td>Translating</td>
         </tr>
         <tr>
