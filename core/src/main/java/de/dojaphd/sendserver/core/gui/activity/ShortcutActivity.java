@@ -284,6 +284,11 @@ public class ShortcutActivity extends Activity {
     return null;
   }
 
+  @Override
+  public <T extends LabyScreen> @Nullable T renew() {
+    return null;
+  }
+
   private enum Action {
     ADD, EDIT, REMOVE
   }
