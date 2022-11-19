@@ -1,0 +1,46 @@
+{
+  "sendserveraddon": {
+    "settings": {
+      "name": "Send To Server",
+      "enabled": {
+        "name": "Able"
+      },
+      "openNameTags": {
+        "name": "Edit Shortcuts"
+      }
+    },
+    "gui": {
+      "manage": {
+        "add": "Add a new shortcut",
+        "name": "Shortcut",
+        "custom": {
+          "name": "Coordinates"
+        },
+        "enabled": {
+          "name": "Able"
+        },
+        "remove": {
+          "title": "Be ye sure ye want t' destroy 'tis entry?"
+        }
+      },
+      "navigation": {
+        "name": "Send To Server"
+      }
+    },
+    "commands": {
+      "send": {
+        "notfound": "§cCould nah find th' used shortcut. Did ye add it already?"
+      },
+      "general": {
+        "syntax": "§cSyntax: %s"
+      },
+      "help": {
+        "msg1": "§a--------- §6Help §a---------",
+        "msg2": "§6/ssasend [shortcut] §7» §aConnect t' an island usin' a shortcut.",
+        "msg3": "§6/ssashortcuts §7» §aOpens th' editor menu o' shortcuts.",
+        "msg4": "§6/ssahelp §7» §aSends 'tis message o' help.",
+        "msg5": "§a-----------------------"
+      }
+    }
+  }
+}

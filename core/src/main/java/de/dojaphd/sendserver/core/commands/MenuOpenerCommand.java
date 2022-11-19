@@ -2,15 +2,17 @@ package de.dojaphd.sendserver.core.commands;
 
 import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import de.dojaphd.sendserver.core.gui.activity.ShortcutActivity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import net.labymod.api.client.chat.command.Command;
+import net.labymod.api.inject.LabyGuice;
 import net.labymod.api.util.I18n;
 
 public class MenuOpenerCommand extends Command {
 
-  //AddonNavigationElement addonNavigationElement;
+  public static SendServerAddon addon;
   String syntax = "/ssashortcuts";
 
   @Inject
@@ -18,26 +20,22 @@ public class MenuOpenerCommand extends Command {
     super("ssashortcuts", "ssashortcuts");
   }
 
-  /**
-   * Currently not working as no method found to implement idea
-   **/
-
   @Override
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssashortcuts")) {
       if (arguments.length != 0) {
-        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED, syntax);
+        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED,
+            syntax);
+      } else {
+        try {
+          ShortcutActivity activity = LabyGuice.getInstance(ShortcutActivity.class);
+          activity.setBackground(true);
+          openActivity(activity);
+          this.labyAPI.hudWidgetRegistry().saveConfig();
+        } catch (Exception e) {
+          addon.logger().error(e.toString());
+        }
       }
-      //System.out.println("Passt");
-      try {
-        //Laby.labyAPI().navigationService().updateLastOpenedElement(addonNavigationElement);
-
-      } catch (Exception e) {
-        System.out.println(e);
-      }
-      displayMessage("Command detected, success");
-      SendServerAddon.getAddon().configuration().openNameTags();
-
       return true;
     }
     return false;
@@ -49,5 +47,6 @@ public class MenuOpenerCommand extends Command {
     String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
     this.displayMessage(Component.text(message, textColor));
   }
+
 
 }

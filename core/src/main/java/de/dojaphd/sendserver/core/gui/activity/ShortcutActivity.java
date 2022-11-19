@@ -1,8 +1,8 @@
 package de.dojaphd.sendserver.core.gui.activity;
 
 import com.google.inject.Inject;
-import de.dojaphd.sendserver.core.ShortcutManager;
 import de.dojaphd.sendserver.core.SendServerAddon;
+import de.dojaphd.sendserver.core.ShortcutManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -44,6 +44,7 @@ public class ShortcutActivity extends Activity {
 
   private Action action;
   private boolean updateRequired;
+  private boolean background = false;
 
   @Inject
   private ShortcutActivity(SendServerAddon addon) {
@@ -76,6 +77,13 @@ public class ShortcutActivity extends Activity {
     listContainer.addId("name-tag-container");
     for (ShortcutWidget shortcutWidget : this.nameTagWidgets.values()) {
       this.nameTagList.addChild(shortcutWidget);
+    }
+
+    if (background) {
+      DivWidget containerBackground = new DivWidget();
+      containerBackground.addId("container-background");
+      containerBackground.addChild(listContainer);
+      this.document().addChild(containerBackground);
     }
 
     listContainer.addChild(new ScrollWidget(this.nameTagList));
@@ -210,8 +218,21 @@ public class ShortcutActivity extends Activity {
       this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
       ShortcutManager shortcutManager = shortcutWidget.getCustomTag();
       shortcutManager.setServerIp(customTextField.getText());
-      this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
-      shortcutWidget.setShortcut(nameTextField.getText());
+      if (Objects.equals(nameTextField.getText(), "")) {
+        //Wenn oben nicht eingefüllt
+        this.addon.configuration().getCustomTags()
+            .put(shortcutManager.getServerIp(), shortcutManager);
+        shortcutWidget.setShortcut(shortcutManager.getServerIp());
+      } else if (Objects.equals(customTextField.getText(), "")) {
+        //Wenn unten nicht eingefüllt
+        shortcutManager.setServerIp(nameTextField.getText());
+        this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
+      } else {
+        //Wenn beide eingefüllt
+        this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
+        shortcutWidget.setShortcut(nameTextField.getText());
+      }
+
       shortcutWidget.setCustomTag(shortcutManager);
       this.setAction(null);
 
@@ -251,9 +272,16 @@ public class ShortcutActivity extends Activity {
   @Override
   public void onCloseScreen() {
     super.onCloseScreen();
-    if (this.updateRequired) {
-      this.addon.reloadTabList();
-    }
+    this.addon.reloadShortcutsList();
+  }
+
+  public void setBackground(boolean background) {
+    this.background = background;
+  }
+
+  @Override
+  public <T extends LabyScreen> @Nullable T renew() {
+    return null;
   }
 
   @Override

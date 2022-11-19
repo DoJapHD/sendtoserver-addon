@@ -6,6 +6,19 @@ TextField {
     margin: 2 15 5 5;
 }
 
+.container-background {
+  width: 100%;
+  height: 100%;
+
+  //background-color: #00000;
+  alignment-x: center;
+  alignment-y: center;
+
+  renderer: "DirtBackground";
+  background-dirt-brightness: 64;
+  background-always-dirt: true;
+}
+
 .manage-container {
   top: 0;
   left: 0;
@@ -20,7 +33,7 @@ TextField {
     alignment-x: center;
     alignment-y: center;
 
-	  background-color: rgba(170, 170, 170, 1.0);
+	  //background-color: rgba(170, 170, 170, 1.0);
 	  padding-top: 20.0;
 	  padding-left: 10.0;
 	  padding-right: 10.0;
@@ -33,6 +46,9 @@ TextField {
       bottom: -20;
     }
   }
+  renderer: "DirtBackground";
+   background-dirt-brightness: 64;
+   background-always-dirt: true;
 }
 
 Shortcut {
@@ -55,7 +71,6 @@ Shortcut:selected {
   width: 100%;
 }
 
-
 .label-name {
   margin-left: 15;
   margin-bottom: 2;
@@ -70,8 +85,11 @@ Shortcut:selected {
   alignment-y: center;
   space-between-entries: 15;
 
-	background-color: rgba(170, 170, 170, 1.0);
+	//background-color: rgba(170, 170, 170, 1.0);
   padding: 10;
+  renderer: "DirtBackground";
+    background-dirt-brightness: 64;
+    background-always-dirt: true;
 }
 
 .remove-confirmation {
@@ -94,7 +112,6 @@ Shortcut:selected {
   space-between-entries: 8;
   width: 90%;
 }
-
 
 .edit-button-menu {
   margin-top: 20;

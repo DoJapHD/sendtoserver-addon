@@ -28,16 +28,13 @@ buildscript {
     }
 
     dependencies {
-        classpath("net.labymod.gradle", "addon", "0.2.46")
+        classpath("net.labymod.gradle", "addon", "0.2.51")
     }
 }
 
 plugins {
     id("java-library")
 }
-
-group = "org.example"
-version = "1.0.0"
 
 plugins.apply("net.labymod.gradle.addon")
 
@@ -64,17 +61,14 @@ addon {
         displayName("Send To Server")
         author("DoJapHD")
         description("Easy to use, command based way, to switch between server. '/ssahelp' for more information.")
-        version(System.getenv().getOrDefault("VERSION", "0.0.0"))
+        version(System.getenv().getOrDefault("VERSION", "1.1"))
 
-        iconUrl(
-                "https://dl.labymod.net/latest/addons/24d1*f048-f85f-4380-9207-0af65fdc43ed/icon.png",
-                project.findProject(":core")
-        )
+        iconUrl("https://i.imgur.com/QdXgGk9.png", project(":core"))
 
 
                 //you can add maven dependencies here. the dependencies will then be downloaded by labymod.
         //mavenDependencies().add(MavenDependency("https://repo.maven.apache.org/maven2/", "com.google.guava:guava:31.1-jre"))
     }
 
-    snapshotRelease()
+    internalRelease()
 }
