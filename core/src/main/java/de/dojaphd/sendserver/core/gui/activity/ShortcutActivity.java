@@ -35,6 +35,8 @@ public class ShortcutActivity extends Activity {
   private final VerticalListWidget<ShortcutWidget> nameTagList;
   private final Map<String, ShortcutWidget> nameTagWidgets;
 
+  private ShortcutWidget selectedNameTag;
+
   private ButtonWidget removeButton;
   private ButtonWidget editButton;
 
@@ -43,7 +45,6 @@ public class ShortcutActivity extends Activity {
   private String lastCustomName;
 
   private Action action;
-  private boolean updateRequired;
   private boolean background = false;
 
   @Inject
@@ -89,7 +90,7 @@ public class ShortcutActivity extends Activity {
     listContainer.addChild(new ScrollWidget(this.nameTagList));
     this.document().addChild(listContainer);
 
-    ShortcutWidget selectedNameTag = this.nameTagList.session().getSelectedEntry();
+    selectedNameTag = this.nameTagList.session().getSelectedEntry();
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("overview-button-menu");
 
@@ -149,7 +150,6 @@ public class ShortcutActivity extends Activity {
       this.nameTagWidgets.remove(shortcutWidget.getShortcut());
       this.nameTagList.session().setSelectedEntry(null);
       this.setAction(null);
-      this.updateRequired = true;
     }));
 
     menu.addEntry(ButtonWidget.i18n("labymod.ui.button.cancel", () -> this.setAction(null)));
@@ -236,7 +236,6 @@ public class ShortcutActivity extends Activity {
       shortcutWidget.setCustomTag(shortcutManager);
       this.setAction(null);
 
-      this.updateRequired = true;
     }));
 
     buttonList.addEntry(ButtonWidget.i18n("labymod.ui.button.cancel", () -> this.setAction(null)));
@@ -247,20 +246,25 @@ public class ShortcutActivity extends Activity {
 
   @Override
   public boolean mouseClicked(MutableMouse mouse, MouseButton mouseButton) {
-    if (Objects.nonNull(this.action)) {
-      return this.inputWidget.mouseClicked(mouse, mouseButton);
+    try {
+      if (Objects.nonNull(this.action)) {
+        return this.inputWidget.mouseClicked(mouse, mouseButton);
+      }
+      return super.mouseClicked(mouse, mouseButton);
+    } finally {
+      selectedNameTag = this.nameTagList.session().getSelectedEntry();
+      this.removeButton.setEnabled(Objects.nonNull(selectedNameTag));
+      this.editButton.setEnabled(Objects.nonNull(selectedNameTag));
     }
-
-    return super.mouseClicked(mouse, mouseButton);
   }
 
   @Override
   public boolean keyPressed(Key key, InputType type) {
+    selectedNameTag = this.nameTagList.session().getSelectedEntry();
     if (key.getId() == 256 && Objects.nonNull(this.action)) {
       this.setAction(null);
       return true;
     }
-
     return super.keyPressed(key, type);
   }
 
