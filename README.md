@@ -74,6 +74,12 @@
             <td>➕ Added</td>            
             <td>Open shorcut editor via command <code>/ssashortcuts</code></td>
             <td align="center"><b>v1.1</b></td>
+            <td>💖 Released</td>
+        </tr>
+        <tr>
+            <td>➕ Fixed</td>
+            <td>Various bugs have been fixed</td>
+            <td align="center"><b>v1.1.1 & v1.1.2</b></td>
             <td>🎉 Ready for Release</td>
         </tr>
         <tr>

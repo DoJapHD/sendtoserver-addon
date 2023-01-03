@@ -20,15 +20,15 @@ public final class AddonConfiguration extends AddonConfig {
   private final ConfigProperty<Boolean> enabled = new ConfigProperty<>(true);
 
   @Exclude
-  private final Map<String, ShortcutManager> customTags = new HashMap<>();
+  private final Map<String, ShortcutManager> shortcuts = new HashMap<>();
 
   public ConfigProperty<Boolean> enabled() {
     return this.enabled;
   }
 
 
-  public Map<String, ShortcutManager> getCustomTags() {
-    return this.customTags;
+  public Map<String, ShortcutManager> getShortcuts() {
+    return this.shortcuts;
   }
 
   @MethodOrder(after = "enabled")
