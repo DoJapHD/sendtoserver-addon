@@ -52,7 +52,7 @@ public class ShortcutActivity extends Activity {
     this.addon = addon;
 
     this.nameTagWidgets = new HashMap<>();
-    addon.configuration().getCustomTags().forEach((userName, customTag) -> {
+    addon.configuration().getShortcuts().forEach((userName, customTag) -> {
       this.nameTagWidgets.put(userName, new ShortcutWidget(userName, customTag));
     });
 
@@ -146,10 +146,11 @@ public class ShortcutActivity extends Activity {
     menu.addId("remove-button-menu");
 
     menu.addEntry(ButtonWidget.i18n("labymod.ui.button.remove", () -> {
-      this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
+      this.addon.configuration().getShortcuts().remove(shortcutWidget.getShortcut());
       this.nameTagWidgets.remove(shortcutWidget.getShortcut());
       this.nameTagList.session().setSelectedEntry(null);
       this.setAction(null);
+      this.addon.reloadShortcutsList();
     }));
 
     menu.addEntry(ButtonWidget.i18n("labymod.ui.button.cancel", () -> this.setAction(null)));
@@ -215,27 +216,41 @@ public class ShortcutActivity extends Activity {
         this.nameTagList.session().setSelectedEntry(shortcutWidget);
       }
 
-      this.addon.configuration().getCustomTags().remove(shortcutWidget.getShortcut());
+      if (nameTextField.getText().contains(" ")) {
+        nameTextField.setText(nameTextField.getText().replace(" ", ""));
+      }
+      if (shortcutWidget.getShortcut().contains(" ")) {
+        shortcutWidget.setShortcut(shortcutWidget.getShortcut().replace(" ", ""));
+      }
+
+      this.addon.configuration().getShortcuts().remove(shortcutWidget.getShortcut());
       ShortcutManager shortcutManager = shortcutWidget.getCustomTag();
       shortcutManager.setServerIp(customTextField.getText());
-      if (Objects.equals(nameTextField.getText(), "")) {
+      if (Objects.equals(nameTextField.getText(), "") && !Objects.equals(
+          shortcutWidget.getShortcut(), "")) {
         //Wenn oben nicht eingefüllt
-        this.addon.configuration().getCustomTags()
+        this.addon.configuration().getShortcuts()
             .put(shortcutManager.getServerIp(), shortcutManager);
         shortcutWidget.setShortcut(shortcutManager.getServerIp());
-      } else if (Objects.equals(customTextField.getText(), "")) {
+      } else if (Objects.equals(shortcutWidget.getShortcut(), "") && !Objects.equals(
+          nameTextField.getText(), "")) {
         //Wenn unten nicht eingefüllt
+        shortcutWidget.setShortcut(nameTextField.getText());
         shortcutManager.setServerIp(nameTextField.getText());
-        this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
+        this.addon.configuration().getShortcuts().put(nameTextField.getText(), shortcutManager);
+      } else if (Objects.equals(shortcutWidget.getShortcut(), "") && Objects.equals(
+          shortcutWidget.getShortcut(), "")) {
+        //Wenn beides nicht eingefüllt
+        //--> Do nothing
       } else {
         //Wenn beide eingefüllt
-        this.addon.configuration().getCustomTags().put(nameTextField.getText(), shortcutManager);
+        this.addon.configuration().getShortcuts().put(nameTextField.getText(), shortcutManager);
         shortcutWidget.setShortcut(nameTextField.getText());
       }
 
       shortcutWidget.setCustomTag(shortcutManager);
       this.setAction(null);
-
+      this.addon.reloadShortcutsList();
     }));
 
     buttonList.addEntry(ButtonWidget.i18n("labymod.ui.button.cancel", () -> this.setAction(null)));
