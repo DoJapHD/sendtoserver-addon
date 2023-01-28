@@ -10,7 +10,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.Switc
 import net.labymod.api.configuration.loader.annotation.ConfigName;
 import net.labymod.api.configuration.loader.annotation.Exclude;
 import net.labymod.api.configuration.loader.property.ConfigProperty;
-import net.labymod.api.inject.LabyGuice;
 import net.labymod.api.util.MethodOrder;
 
 @ConfigName("settings")
@@ -34,6 +33,11 @@ public final class AddonConfiguration extends AddonConfig {
   @MethodOrder(after = "enabled")
   @AddonActivitySetting
   public Activity openNameTags() {
-    return LabyGuice.getInstance(ShortcutActivity.class);
+    return new ShortcutActivity(false);
+  }
+
+  public void removeInvalidNameTags() {
+    this.shortcuts.entrySet()
+        .removeIf(entry -> entry.getKey().isEmpty() || entry.getValue().getServerIp().isEmpty());
   }
 }

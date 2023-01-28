@@ -1,11 +1,12 @@
 package de.dojaphd.sendserver.core.gui.activity;
 
-import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
 import de.dojaphd.sendserver.core.ShortcutManager;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.regex.Pattern;
+import net.labymod.api.Laby;
 import net.labymod.api.client.gui.mouse.MutableMouse;
 import net.labymod.api.client.gui.screen.LabyScreen;
 import net.labymod.api.client.gui.screen.Parent;
@@ -24,6 +25,7 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.FlexibleContentWi
 import net.labymod.api.client.gui.screen.widget.widgets.layout.ScrollWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
+import net.labymod.api.client.render.font.TextColorStripper;
 import org.jetbrains.annotations.Nullable;
 
 @Link("manage.lss")
@@ -31,12 +33,13 @@ import org.jetbrains.annotations.Nullable;
 @AutoActivity
 public class ShortcutActivity extends Activity {
 
+  private static final Pattern SHORTCUT_REGEX = Pattern.compile("[\\w.]{0,32}");
+  private static final TextColorStripper TEXT_COLOR_STRIPPER = Laby.references()
+      .textColorStripper();
   private final SendServerAddon addon;
   private final VerticalListWidget<ShortcutWidget> nameTagList;
   private final Map<String, ShortcutWidget> nameTagWidgets;
-
   private ShortcutWidget selectedNameTag;
-
   private ButtonWidget removeButton;
   private ButtonWidget editButton;
 
@@ -47,9 +50,11 @@ public class ShortcutActivity extends Activity {
   private Action action;
   private boolean background = false;
 
-  @Inject
-  private ShortcutActivity(SendServerAddon addon) {
-    this.addon = addon;
+
+  public ShortcutActivity(boolean background) {
+    this.addon = SendServerAddon.getAddon();
+    addon.reloadShortcutsList();
+    this.background = background;
 
     this.nameTagWidgets = new HashMap<>();
     addon.configuration().getShortcuts().forEach((userName, customTag) -> {
@@ -74,8 +79,8 @@ public class ShortcutActivity extends Activity {
   public void initialize(Parent parent) {
     super.initialize(parent);
 
-    DivWidget listContainer = new DivWidget();
-    listContainer.addId("name-tag-container");
+    FlexibleContentWidget container = new FlexibleContentWidget();
+    container.addId("name-tag-container");
     for (ShortcutWidget shortcutWidget : this.nameTagWidgets.values()) {
       this.nameTagList.addChild(shortcutWidget);
     }
@@ -83,14 +88,13 @@ public class ShortcutActivity extends Activity {
     if (background) {
       DivWidget containerBackground = new DivWidget();
       containerBackground.addId("container-background");
-      containerBackground.addChild(listContainer);
+      containerBackground.addChild(container);
       this.document().addChild(containerBackground);
     }
 
-    listContainer.addChild(new ScrollWidget(this.nameTagList));
-    this.document().addChild(listContainer);
+    container.addFlexibleContent(new ScrollWidget(this.nameTagList));
 
-    selectedNameTag = this.nameTagList.session().getSelectedEntry();
+    this.selectedNameTag = this.nameTagList.session().getSelectedEntry();
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("overview-button-menu");
 
@@ -98,16 +102,19 @@ public class ShortcutActivity extends Activity {
 
     this.editButton = ButtonWidget.i18n("labymod.ui.button.edit",
         () -> this.setAction(Action.EDIT));
-    this.editButton.setEnabled(Objects.nonNull(selectedNameTag));
+    this.editButton.setEnabled(this.selectedNameTag != null);
     menu.addEntry(this.editButton);
 
     this.removeButton = ButtonWidget.i18n("labymod.ui.button.remove",
         () -> this.setAction(Action.REMOVE));
-    this.removeButton.setEnabled(Objects.nonNull(selectedNameTag));
+    this.removeButton.setEnabled(this.selectedNameTag != null);
     menu.addEntry(this.removeButton);
 
-    this.document().addChild(menu);
-    if (Objects.isNull(this.action)) {
+    container.addContent(menu);
+    if (!background) {
+      this.document().addChild(container);
+    }
+    if (this.action == null) {
       return;
     }
 
@@ -122,10 +129,10 @@ public class ShortcutActivity extends Activity {
         overlayWidget = this.initializeManageContainer(newCustomNameTag);
         break;
       case EDIT:
-        overlayWidget = this.initializeManageContainer(selectedNameTag);
+        overlayWidget = this.initializeManageContainer(this.selectedNameTag);
         break;
       case REMOVE:
-        overlayWidget = this.initializeRemoveContainer(selectedNameTag);
+        overlayWidget = this.initializeRemoveContainer(this.selectedNameTag);
         break;
     }
 
@@ -141,6 +148,11 @@ public class ShortcutActivity extends Activity {
         "sendserveraddon.gui.manage.remove.title");
     confirmationWidget.addId("remove-confirmation");
     this.inputWidget.addContent(confirmationWidget);
+
+    ShortcutWidget previewWidget = new ShortcutWidget(shortcutWidget.getShortcut(),
+        shortcutWidget.getCustomTag());
+    previewWidget.addId("remove-preview");
+    this.inputWidget.addContent(previewWidget);
 
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("remove-button-menu");
@@ -160,6 +172,9 @@ public class ShortcutActivity extends Activity {
   }
 
   private DivWidget initializeManageContainer(ShortcutWidget shortcutWidget) {
+    TextFieldWidget customTextField = new TextFieldWidget();
+    ButtonWidget doneButton = ButtonWidget.i18n("labymod.ui.button.done");
+
     DivWidget inputContainer = new DivWidget();
     inputContainer.addId("input-container");
 
@@ -175,14 +190,18 @@ public class ShortcutActivity extends Activity {
 
     TextFieldWidget nameTextField = new TextFieldWidget();
     nameTextField.setText(shortcutWidget.getShortcut());
+    nameTextField.validator(newValue -> SHORTCUT_REGEX.matcher(newValue).matches());
     nameTextField.updateListener(newValue -> {
+      doneButton.setEnabled(
+          !newValue.trim().isEmpty() && !this.getStrippedText(customTextField.getText()).isEmpty()
+      );
       if (newValue.equals(this.lastUserName)) {
         return;
       }
 
       this.lastUserName = newValue;
-    });
 
+    });
     nameList.addEntry(nameTextField);
     this.inputWidget.addContent(nameList);
 
@@ -194,9 +213,12 @@ public class ShortcutActivity extends Activity {
     HorizontalListWidget customNameList = new HorizontalListWidget();
     customNameList.addId("input-name-list");
 
-    TextFieldWidget customTextField = new TextFieldWidget();
     customTextField.setText(shortcutWidget.getCustomTag().getServerIp());
+    customTextField.validator(newValue -> SHORTCUT_REGEX.matcher(newValue).matches());
     customTextField.updateListener(newValue -> {
+      doneButton.setEnabled(
+          !this.getStrippedText(newValue).isEmpty() && !nameTextField.getText().trim().isEmpty()
+      );
       if (newValue.equals(this.lastCustomName)) {
         return;
       }
@@ -210,48 +232,30 @@ public class ShortcutActivity extends Activity {
     HorizontalListWidget buttonList = new HorizontalListWidget();
     buttonList.addId("edit-button-menu");
 
-    buttonList.addEntry(ButtonWidget.i18n("labymod.ui.button.done", () -> {
-      if (shortcutWidget.getShortcut().length() == 0) {
+    doneButton.setEnabled(
+        !nameTextField.getText().trim().isEmpty() && !this.getStrippedText(
+            customTextField.getText()).isEmpty()
+    );
+    doneButton.setPressable(() -> {
+      if (shortcutWidget.getCustomTag().getServerIp().length() == 0) {
         this.nameTagWidgets.put(nameTextField.getText(), shortcutWidget);
         this.nameTagList.session().setSelectedEntry(shortcutWidget);
       }
 
-      if (nameTextField.getText().contains(" ")) {
-        nameTextField.setText(nameTextField.getText().replace(" ", ""));
-      }
-      if (shortcutWidget.getShortcut().contains(" ")) {
-        shortcutWidget.setShortcut(shortcutWidget.getShortcut().replace(" ", ""));
-      }
-
       this.addon.configuration().getShortcuts().remove(shortcutWidget.getShortcut());
-      ShortcutManager shortcutManager = shortcutWidget.getCustomTag();
-      shortcutManager.setServerIp(customTextField.getText());
-      if (Objects.equals(nameTextField.getText(), "") && !Objects.equals(
-          shortcutWidget.getShortcut(), "")) {
-        //Wenn oben nicht eingefüllt
-        this.addon.configuration().getShortcuts()
-            .put(shortcutManager.getServerIp(), shortcutManager);
-        shortcutWidget.setShortcut(shortcutManager.getServerIp());
-      } else if (Objects.equals(shortcutWidget.getShortcut(), "") && !Objects.equals(
-          nameTextField.getText(), "")) {
-        //Wenn unten nicht eingefüllt
-        shortcutWidget.setShortcut(nameTextField.getText());
-        shortcutManager.setServerIp(nameTextField.getText());
-        this.addon.configuration().getShortcuts().put(nameTextField.getText(), shortcutManager);
-      } else if (Objects.equals(shortcutWidget.getShortcut(), "") && Objects.equals(
-          shortcutWidget.getShortcut(), "")) {
-        //Wenn beides nicht eingefüllt
-        //--> Do nothing
-      } else {
-        //Wenn beide eingefüllt
-        this.addon.configuration().getShortcuts().put(nameTextField.getText(), shortcutManager);
-        shortcutWidget.setShortcut(nameTextField.getText());
-      }
+      ShortcutManager customNameTag = shortcutWidget.getCustomTag();
+      customNameTag.setServerIp(customTextField.getText());
+      this.addon.configuration().getShortcuts().put(nameTextField.getText(), customNameTag);
+      this.addon.configuration().removeInvalidNameTags();
 
-      shortcutWidget.setCustomTag(shortcutManager);
+      shortcutWidget.setShortcut(nameTextField.getText());
+      shortcutWidget.setCustomTag(customNameTag);
       this.setAction(null);
+
       this.addon.reloadShortcutsList();
-    }));
+    });
+
+    buttonList.addEntry(doneButton);
 
     buttonList.addEntry(ButtonWidget.i18n("labymod.ui.button.cancel", () -> this.setAction(null)));
     inputContainer.addChild(this.inputWidget);
@@ -259,27 +263,37 @@ public class ShortcutActivity extends Activity {
     return inputContainer;
   }
 
+  private String getStrippedText(String text) {
+    text = text.trim();
+    if (text.isEmpty()) {
+      return text;
+    }
+
+    return TEXT_COLOR_STRIPPER.stripColorCodes(text, '&');
+  }
+
   @Override
   public boolean mouseClicked(MutableMouse mouse, MouseButton mouseButton) {
     try {
-      if (Objects.nonNull(this.action)) {
+      if (this.action != null) {
         return this.inputWidget.mouseClicked(mouse, mouseButton);
       }
+
       return super.mouseClicked(mouse, mouseButton);
     } finally {
-      selectedNameTag = this.nameTagList.session().getSelectedEntry();
-      this.removeButton.setEnabled(Objects.nonNull(selectedNameTag));
-      this.editButton.setEnabled(Objects.nonNull(selectedNameTag));
+      this.selectedNameTag = this.nameTagList.session().getSelectedEntry();
+      this.removeButton.setEnabled(this.selectedNameTag != null);
+      this.editButton.setEnabled(this.selectedNameTag != null);
     }
   }
 
   @Override
   public boolean keyPressed(Key key, InputType type) {
-    selectedNameTag = this.nameTagList.session().getSelectedEntry();
-    if (key.getId() == 256 && Objects.nonNull(this.action)) {
+    if (key.getId() == 256 && this.action != null) {
       this.setAction(null);
       return true;
     }
+
     return super.keyPressed(key, type);
   }
 
@@ -289,20 +303,13 @@ public class ShortcutActivity extends Activity {
   }
 
   @Override
-  public void onCloseScreen() {
-    super.onCloseScreen();
-    this.addon.reloadShortcutsList();
+  public <T extends LabyScreen> @Nullable T renew() {
+    return null;
   }
 
   public void setBackground(boolean background) {
     this.background = background;
   }
-
-  @Override
-  public <T extends LabyScreen> @Nullable T renew() {
-    return null;
-  }
-
 
   private enum Action {
     ADD, EDIT, REMOVE

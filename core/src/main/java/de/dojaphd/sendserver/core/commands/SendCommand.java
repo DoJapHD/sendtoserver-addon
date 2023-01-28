@@ -1,23 +1,21 @@
 package de.dojaphd.sendserver.core.commands;
 
-import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
 import de.dojaphd.sendserver.core.ShortcutManager;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import net.labymod.api.client.chat.command.Command;
-import net.labymod.api.inject.LabyGuice;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextColor;
 import net.labymod.api.util.I18n;
 
 public class SendCommand extends Command {
 
-  SendServerAddon addon = LabyGuice.getInstance(SendServerAddon.class);
+  SendServerAddon addon;
   String syntax = "/ssasend [shortcut]";
 
-  @Inject
-  private SendCommand() {
+  public SendCommand(SendServerAddon addon) {
     super("ssasend", "ssasend");
+    this.addon = addon;
   }
 
   @Override
@@ -43,7 +41,6 @@ public class SendCommand extends Command {
       serverIp = serverIp.replaceAll("&.", "");
       addon.labyAPI().serverController().joinServer(serverIp);
       return true;
-
     }
     return false;
   }

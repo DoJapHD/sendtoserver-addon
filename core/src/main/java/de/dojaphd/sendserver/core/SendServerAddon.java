@@ -1,22 +1,20 @@
 package de.dojaphd.sendserver.core;
 
-import com.google.inject.Singleton;
 import de.dojaphd.sendserver.core.commands.HelpCommand;
 import de.dojaphd.sendserver.core.commands.MenuOpenerCommand;
 import de.dojaphd.sendserver.core.commands.SendCommand;
-import de.dojaphd.sendserver.core.utils.ModColor;
 import java.util.Map;
+import javax.inject.Singleton;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.event.labymod.config.ConfigurationSaveEvent;
-import net.labymod.api.models.addon.annotation.AddonListener;
+import net.labymod.api.models.addon.annotation.AddonMain;
 
-@AddonListener
+@AddonMain
 @Singleton
 public class SendServerAddon extends LabyAddon<AddonConfiguration> {
 
   public static SendServerAddon addon;
-  public static String Prefix =
-      ModColor.cl('7') + "[" + ModColor.cl('6') + "SendServerAddon" + ModColor.cl('7') + "] §r";
+  public static String Prefix = "§7[§6SendServerAddon§7] §r";
 
   public static SendServerAddon getAddon() {
     return addon;
@@ -34,9 +32,9 @@ public class SendServerAddon extends LabyAddon<AddonConfiguration> {
   }
 
   private void init() {
-    this.registerCommand(SendCommand.class);
-    this.registerCommand(HelpCommand.class);
-    this.registerCommand(MenuOpenerCommand.class);
+    this.registerCommand(new SendCommand(this));
+    this.registerCommand(new HelpCommand(this));
+    this.registerCommand(new MenuOpenerCommand(this));
   }
 
   @Override

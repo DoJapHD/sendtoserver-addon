@@ -1,13 +1,13 @@
 package de.dojaphd.sendserver.core;
 
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.labymod.api.client.component.TextComponent;
+import net.labymod.api.client.component.serializer.legacy.LegacyComponentSerializer;
 
 public class ShortcutManager {
 
   private String serverIp;
 
-  public ShortcutManager(String serverIp) {
+  private ShortcutManager(String serverIp) {
     this.serverIp = serverIp;
   }
 
@@ -29,6 +29,7 @@ public class ShortcutManager {
   }
 
   public TextComponent getComponent() {
-    return LegacyComponentSerializer.legacyAmpersand().deserialize(this.getServerIp());
+    return (TextComponent) LegacyComponentSerializer.legacyAmpersand()
+        .deserialize(this.getServerIp());
   }
 }

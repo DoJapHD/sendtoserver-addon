@@ -41,15 +41,6 @@ Shortcut {
   height: 24;
   margin-top: 2;
 
-  .avatar {
-    left: 4;
-    top: 2;
-    width: 16;
-    height: width;
-    clickable: true;
-
-    margin-top: 2;
-  }
 
   .name {
     left: 5;

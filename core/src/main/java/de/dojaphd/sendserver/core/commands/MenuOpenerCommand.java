@@ -1,23 +1,24 @@
 package de.dojaphd.sendserver.core.commands;
 
-import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
 import de.dojaphd.sendserver.core.gui.activity.ShortcutActivity;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import net.labymod.api.client.chat.command.Command;
-import net.labymod.api.inject.LabyGuice;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextColor;
 import net.labymod.api.util.I18n;
+
 
 public class MenuOpenerCommand extends Command {
 
-  public static SendServerAddon addon;
-  String syntax = "/ssashortcuts";
+  private final SendServerAddon addon;
+  private final String syntax = "/ssashortcuts";
 
-  @Inject
-  private MenuOpenerCommand() {
+
+  public MenuOpenerCommand(SendServerAddon addon) {
     super("ssashortcuts", "ssashortcuts");
+    this.addon = addon;
+
   }
 
   @Override
@@ -28,8 +29,7 @@ public class MenuOpenerCommand extends Command {
             syntax);
       } else {
         try {
-          ShortcutActivity activity = LabyGuice.getInstance(ShortcutActivity.class);
-          activity.setBackground(true);
+          ShortcutActivity activity = new ShortcutActivity(true);
           openActivity(activity);
           this.labyAPI.hudWidgetRegistry().saveConfig();
         } catch (Exception e) {
@@ -47,6 +47,5 @@ public class MenuOpenerCommand extends Command {
     String message = SendServerAddon.Prefix + I18n.translate(translationKey, arguments);
     this.displayMessage(Component.text(message, textColor));
   }
-
 
 }
