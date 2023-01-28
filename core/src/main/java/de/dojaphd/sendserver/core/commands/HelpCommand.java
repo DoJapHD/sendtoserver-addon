@@ -1,22 +1,21 @@
 package de.dojaphd.sendserver.core.commands;
 
-import com.google.inject.Inject;
 import de.dojaphd.sendserver.core.SendServerAddon;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextColor;
 import net.labymod.api.client.chat.command.Command;
+import net.labymod.api.client.component.Component;
+import net.labymod.api.client.component.format.NamedTextColor;
+import net.labymod.api.client.component.format.TextColor;
 import net.labymod.api.util.I18n;
 
 public class HelpCommand extends Command {
 
-  String syntax = "/ssahelp";
+  private final String syntax = "/ssahelp";
+  private final SendServerAddon addon;
 
-  @Inject
-  private HelpCommand() {
+  public HelpCommand(SendServerAddon addon) {
     super("ssahelp", "ssahelp");
+    this.addon = addon;
   }
-
 
   @Override
   public boolean execute(String prefix, String[] arguments) {
@@ -30,7 +29,6 @@ public class HelpCommand extends Command {
     }
     return false;
   }
-
 
   public void sendMessage() {
     displayTranslatableMsg("sendserveraddon.commands.help.msg1", NamedTextColor.GREEN);

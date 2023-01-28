@@ -1,7 +1,7 @@
 package de.dojaphd.sendserver.core.gui.activity;
 
 import de.dojaphd.sendserver.core.ShortcutManager;
-import net.kyori.adventure.text.Component;
+import net.labymod.api.client.component.Component;
 import net.labymod.api.client.gui.lss.property.annotation.AutoWidget;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.widget.SimpleWidget;
