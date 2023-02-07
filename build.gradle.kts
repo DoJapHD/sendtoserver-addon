@@ -21,11 +21,12 @@ labyMod {
     minecraft {
         registerVersions(
                 "1.8.9",
+                "1.12.2",
                 "1.17.1",
                 "1.18.2",
                 "1.19.2",
                 "1.19.3",
-                "23w04a"
+                "23w05a"
         ) { version, provider ->
             configureRun(provider, version)
         }
