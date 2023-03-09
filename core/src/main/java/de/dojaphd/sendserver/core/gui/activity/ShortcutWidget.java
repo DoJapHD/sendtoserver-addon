@@ -26,7 +26,8 @@ public class ShortcutWidget extends SimpleWidget {
     nameWidget.addId("name");
     this.addChild(nameWidget);
 
-    ComponentWidget customNameWidget = ComponentWidget.component(this.shortcutManager.getComponent());
+    ComponentWidget customNameWidget = ComponentWidget.component(
+        this.shortcutManager.getComponent());
     customNameWidget.addId("custom-name");
     this.addChild(customNameWidget);
   }
