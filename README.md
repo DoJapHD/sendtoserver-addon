@@ -9,7 +9,6 @@
 
 <p>All you need to do to start switching servers with a shortcut is adding shortcuts in the addon settings.</p>
 <br>
-<br>
 <h3>⚙️ Configuration</h3>
 <b>Step 1</b> › Download the addon from the LabyMod addon store. If you want to use an unofficial version, there are sometimes unreleased features <a href="https://github.com/DoJapHD/sendtoserver-addon/releases">here</a>. Please note, that you won't receive any support for using or installing unofficial versions.
 
@@ -27,8 +26,6 @@
 <br>
 
 ![LM4-SendServer-AddonSettings](https://user-images.githubusercontent.com/63593457/189341884-70313e18-14bd-4609-9d0c-3c3ab9186d3b.png)
-
-
 <br>
 
 
@@ -80,6 +77,12 @@
             <td>➕ Fixed</td>
             <td>Various bugs have been fixed</td>
             <td align="center"><b>v1.1.1 & v1.1.2</b></td>
+            <td>💖 Released</td>
+        </tr>
+        <tr>
+            <td>➕ Fixed</td>
+            <td>Updated code & removed deprecated methods</td>
+            <td align="center"><b>v1.1.3 & v1.1.4</b></td>
             <td>🎉 Ready for Release</td>
         </tr>
         <tr>
