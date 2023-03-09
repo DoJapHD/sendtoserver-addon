@@ -8,7 +8,6 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 import net.labymod.api.Laby;
 import net.labymod.api.client.gui.mouse.MutableMouse;
-import net.labymod.api.client.gui.screen.LabyScreen;
 import net.labymod.api.client.gui.screen.Parent;
 import net.labymod.api.client.gui.screen.activity.Activity;
 import net.labymod.api.client.gui.screen.activity.AutoActivity;
@@ -26,7 +25,6 @@ import net.labymod.api.client.gui.screen.widget.widgets.layout.ScrollWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.HorizontalListWidget;
 import net.labymod.api.client.gui.screen.widget.widgets.layout.list.VerticalListWidget;
 import net.labymod.api.client.render.font.TextColorStripper;
-import org.jetbrains.annotations.Nullable;
 
 @Link("manage.lss")
 @Link("overview.lss")
@@ -300,11 +298,6 @@ public class ShortcutActivity extends Activity {
   private void setAction(Action action) {
     this.action = action;
     this.reload();
-  }
-
-  @Override
-  public <T extends LabyScreen> @Nullable T renew() {
-    return null;
   }
 
   public void setBackground(boolean background) {
