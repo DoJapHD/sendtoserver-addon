@@ -80,9 +80,15 @@
             <td>💖 Released</td>
         </tr>
         <tr>
+            <td>➕ Added</td>
+            <td>Input validation added</td>
+            <td align="center"><b>v1.2</b></td>
+            <td>💖 Released</td>
+        </tr>
+        <tr>
             <td>➕ Fixed</td>
             <td>Updated code & removed deprecated methods</td>
-            <td align="center"><b>v1.1.3 & v1.1.4</b></td>
+            <td align="center"><b>v1.2.1 & v1.2.2</b></td>
             <td>🎉 Ready for Release</td>
         </tr>
         <tr>
