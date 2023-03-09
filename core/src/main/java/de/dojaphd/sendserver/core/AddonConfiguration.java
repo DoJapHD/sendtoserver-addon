@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import net.labymod.api.addon.AddonConfig;
 import net.labymod.api.client.gui.screen.activity.Activity;
-import net.labymod.api.client.gui.screen.widget.widgets.activity.settings.AddonActivityWidget.AddonActivitySetting;
+import net.labymod.api.client.gui.screen.widget.widgets.activity.settings.ActivitySettingWidget.ActivitySetting;
 import net.labymod.api.client.gui.screen.widget.widgets.input.SwitchWidget.SwitchSetting;
 import net.labymod.api.configuration.loader.annotation.ConfigName;
 import net.labymod.api.configuration.loader.annotation.Exclude;
@@ -31,7 +31,7 @@ public final class AddonConfiguration extends AddonConfig {
   }
 
   @MethodOrder(after = "enabled")
-  @AddonActivitySetting
+  @ActivitySetting
   public Activity openNameTags() {
     return new ShortcutActivity(false);
   }

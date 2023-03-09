@@ -21,7 +21,8 @@ public class HelpCommand extends Command {
   public boolean execute(String prefix, String[] arguments) {
     if (prefix.equalsIgnoreCase("ssahelp")) {
       if (arguments.length != 0) {
-        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED, syntax);
+        displayTranslatableMsg("sendserveraddon.commands.general.syntax", NamedTextColor.RED,
+            syntax);
       } else {
         sendMessage();
       }
@@ -41,12 +42,12 @@ public class HelpCommand extends Command {
   private void displayTranslatableMsg(String key, TextColor textColor, Object... arguments) {
     String translationKey = key;
 
-    if(key.equals("help.msg5")) {
+    if (key.equals("help.msg5")) {
       String translation = I18n.translate("sendserveraddon.commands.help.msg1");
       String HelpWorldlengthFirstSplit = translation.split("§6")[1];
       int HelpWorldlengthSecondSplitLength = HelpWorldlengthFirstSplit.split(" §a")[0].length();
       StringBuilder sb = new StringBuilder(I18n.translate("sendserveraddon.commands.help.msg5"));
-      for (int i = 0; i < HelpWorldlengthSecondSplitLength-5; i++) {
+      for (int i = 0; i < HelpWorldlengthSecondSplitLength - 5; i++) {
         sb.append("-");
       }
       String message = SendServerAddon.Prefix + sb;
