@@ -1,5 +1,5 @@
-<h1 align="center">SendToServer <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/twitter/322/linked-paperclips_1f587-fe0f.png" width="30" alt="Link emoji"></h1>
-<p align="center">Never again to the server list! <img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/129/fire_1f525.png" width="15" alt="Fire emoji"></p>
+<h1 align="center">SendToServer <img src="https://em-content.zobj.net/thumbs/160/twitter/322/linked-paperclips_1f587-fe0f.png" width="30" alt="Link emoji"></h1>
+<p align="center">Never again to the server list! <img src="https://em-content.zobj.net/thumbs/160/twitter/322/fire_1f525.png" width="15" alt="Fire emoji"></p>
 
 <h3>🤖 How it works</h3>
 <p>SendToServer is an addon developed for <a href="https://labymod.net/">LabyMod</a> that enables you to switch servers via a shortcut set in the addon settings.</p>
@@ -13,13 +13,13 @@
 <h3>⚙️ Configuration</h3>
 <b>Step 1</b> › Download the addon from the LabyMod addon store. If you want to use an unofficial version, there are sometimes unreleased features <a href="https://github.com/DoJapHD/sendtoserver-addon/releases">here</a>. Please note, that you won't receive any support for using or installing unofficial versions.
 
-![LM3-SendServer-StoreBig](https://user-images.githubusercontent.com/63593457/189341745-1ffa7bd2-502f-43e6-87e1-91cafffe3be9.png)
+![LM4-Addonstore](https://user-images.githubusercontent.com/63593457/217375974-e3ec2756-4573-4e3a-9f92-7206fecd3f00.png)
 
 
 <br>
 <b>Step 2</b> › If you're asked to restart your game, please do so in order to activate the addon correctly. Now head over to the configuration by clicking on the small <code>⚙️</code> icon to finish the setup of your addon.
-
-![LM3-SendServer-Store](https://user-images.githubusercontent.com/63593457/189341854-52752853-2459-447d-b44b-7f87f0fca570.png)
+<br>
+<br>
 
 
 <br>
