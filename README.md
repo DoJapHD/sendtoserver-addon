@@ -89,6 +89,12 @@
             <td>➕ Fixed</td>
             <td>Updated code & removed deprecated methods</td>
             <td align="center"><b>v1.2.1 & v1.2.2</b></td>
+            <td>💖 Released</td>
+        </tr>
+        <tr>
+            <td>➕ Added</td>
+            <td>Ports can now be used; Public release LabyMod 4</td>
+            <td align="center"><b>v1.3</b></td>
             <td>🎉 Ready for Release</td>
         </tr>
         <tr>

@@ -1,7 +1,7 @@
 rootProject.name = "sendserveraddon"
 
 pluginManagement {
-    val labyGradlePluginVersion = "0.3.22"
+    val labyGradlePluginVersion = "0.3.28"
     plugins {
         id("net.labymod.gradle") version (labyGradlePluginVersion)
     }

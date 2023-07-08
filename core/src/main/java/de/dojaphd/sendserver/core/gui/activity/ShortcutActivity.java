@@ -31,7 +31,7 @@ import net.labymod.api.client.render.font.TextColorStripper;
 @AutoActivity
 public class ShortcutActivity extends Activity {
 
-  private static final Pattern SHORTCUT_REGEX = Pattern.compile("[\\w.]{0,32}");
+  private static final Pattern SHORTCUT_REGEX = Pattern.compile("[\\w.:]{0,32}");
   private static final TextColorStripper TEXT_COLOR_STRIPPER = Laby.references()
       .textColorStripper();
   private final SendServerAddon addon;
