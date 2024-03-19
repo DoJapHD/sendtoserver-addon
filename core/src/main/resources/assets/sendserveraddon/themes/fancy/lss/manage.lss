@@ -13,7 +13,7 @@ TextField {
   alignment-x: center;
   alignment-y: center;
 
-  background-color: rgba(20, 20, 20, 1.0);
+  background-color: rgba(20, 20, 20, 0.8);
 }
 
 .manage-container {
@@ -48,7 +48,7 @@ TextField {
 }
 
 Shortcut {
-  background-color: rgba(17,17,17,0.55);
+  background-color: rgba(17,17,17,0.7);
   border-radius: 5;
 }
 

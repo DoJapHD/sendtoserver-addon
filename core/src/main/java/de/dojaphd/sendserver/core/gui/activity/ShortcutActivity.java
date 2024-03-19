@@ -31,15 +31,17 @@ import net.labymod.api.client.render.font.TextColorStripper;
 @AutoActivity
 public class ShortcutActivity extends Activity {
 
-  private static final Pattern SHORTCUT_REGEX = Pattern.compile("[\\w.:]{0,32}");
+  private static final Pattern SHORTCUT_REGEX = Pattern.compile("[a-zA-Z0-9-.:]{0,32}");
   private static final TextColorStripper TEXT_COLOR_STRIPPER = Laby.references()
       .textColorStripper();
   private final SendServerAddon addon;
   private final VerticalListWidget<ShortcutWidget> nameTagList;
   private final Map<String, ShortcutWidget> nameTagWidgets;
   private ShortcutWidget selectedNameTag;
+  private ButtonWidget addButton;
   private ButtonWidget removeButton;
   private ButtonWidget editButton;
+  private FlexibleContentWidget container;
 
   private FlexibleContentWidget inputWidget;
   private String lastUserName;
@@ -77,7 +79,7 @@ public class ShortcutActivity extends Activity {
   public void initialize(Parent parent) {
     super.initialize(parent);
 
-    FlexibleContentWidget container = new FlexibleContentWidget();
+    container = new FlexibleContentWidget();
     container.addId("name-tag-container");
     for (ShortcutWidget shortcutWidget : this.nameTagWidgets.values()) {
       this.nameTagList.addChild(shortcutWidget);
@@ -96,7 +98,8 @@ public class ShortcutActivity extends Activity {
     HorizontalListWidget menu = new HorizontalListWidget();
     menu.addId("overview-button-menu");
 
-    menu.addEntry(ButtonWidget.i18n("labymod.ui.button.add", () -> this.setAction(Action.ADD)));
+    this.addButton = ButtonWidget.i18n("labymod.ui.button.add", () -> this.setAction(Action.ADD));
+    menu.addEntry(this.addButton);
 
     this.editButton = ButtonWidget.i18n("labymod.ui.button.edit",
         () -> this.setAction(Action.EDIT));
@@ -112,6 +115,7 @@ public class ShortcutActivity extends Activity {
     if (!background) {
       this.document().addChild(container);
     }
+
     if (this.action == null) {
       return;
     }
@@ -139,6 +143,8 @@ public class ShortcutActivity extends Activity {
   }
 
   private FlexibleContentWidget initializeRemoveContainer(ShortcutWidget shortcutWidget) {
+    container.setVisible(false);
+
     this.inputWidget = new FlexibleContentWidget();
     this.inputWidget.addId("remove-container");
 
@@ -161,6 +167,8 @@ public class ShortcutActivity extends Activity {
       this.nameTagList.session().setSelectedEntry(null);
       this.setAction(null);
       this.addon.reloadShortcutsList();
+
+      container.setVisible(true);
     }));
 
     menu.addEntry(ButtonWidget.i18n("labymod.ui.button.cancel", () -> this.setAction(null)));
@@ -170,6 +178,8 @@ public class ShortcutActivity extends Activity {
   }
 
   private DivWidget initializeManageContainer(ShortcutWidget shortcutWidget) {
+    container.setVisible(false);
+
     TextFieldWidget customTextField = new TextFieldWidget();
     ButtonWidget doneButton = ButtonWidget.i18n("labymod.ui.button.done");
 
@@ -248,9 +258,12 @@ public class ShortcutActivity extends Activity {
 
       shortcutWidget.setShortcut(nameTextField.getText());
       shortcutWidget.setCustomTag(customNameTag);
+
       this.setAction(null);
 
       this.addon.reloadShortcutsList();
+
+      container.setVisible(true);
     });
 
     buttonList.addEntry(doneButton);
