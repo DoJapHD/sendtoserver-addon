@@ -4,11 +4,10 @@ plugins {
     id("net.labymod.gradle.addon")
 }
 
-
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
 labyMod {
-    defaultPackageName = "de.dojaphd.sendserver.core" //change this to your main package name (used by all modules)
+    defaultPackageName = "de.dojaphd.sendserver.core"
     addonInfo {
         namespace = "sendserveraddon"
         displayName = "Send To Server"
@@ -22,6 +21,7 @@ labyMod {
         registerVersions(
                 "1.8.9",
                 "1.12.2",
+                "1.16.5",
                 "1.17.1",
                 "1.18.2",
                 "1.19.2",
@@ -70,7 +70,11 @@ fun configureRun(provider: net.labymod.gradle.core.minecraft.provider.VersionPro
         args("--addon-dev-environment", "true")
     }
 
-    provider.javaVersion = JavaVersion.VERSION_17
+    provider.javaVersion = when (gameVersion) {
+        else -> {
+            JavaVersion.VERSION_21
+        }
+    }
 
     provider.mixin {
         val mixinMinVersion = when (gameVersion) {
